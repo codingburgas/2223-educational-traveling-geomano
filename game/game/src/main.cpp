@@ -1,4 +1,4 @@
-#include "raylib.h"
+#include "headers/include.hpp"
 int main(void)
 {
     // Initialization
@@ -6,6 +6,7 @@ int main(void)
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Eurobunnea");    //Window initialization
+    loadMainMenuAssets();
 
     SetTargetFPS(60);   // Set game fps
 
@@ -21,12 +22,11 @@ int main(void)
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-
-            DrawText("First window attempt (I like cats)", (screenWidth / 2) - 260 , 500, 40, MAROON);
+            loadMainMenu();
 
         EndDrawing();
     }
-
+    unloadMainMenu();
     CloseWindow();  // Close window
     return 0;
 }
