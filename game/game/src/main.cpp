@@ -13,13 +13,27 @@ int main(void)
     
     Image backgroundImg = LoadImage("../src/assets/main-menu-bg1.png"); //Image assets initialization
     Image startButton = LoadImage("../src/assets/main-menu-button.png");
+    Image frontImg = LoadImage("../src/assets/front1.png");
+    Image backImg = LoadImage("../src/assets/back1.png");
+    Image rightImg = LoadImage("../src/assets/right1.png");
+    Image leftImg = LoadImage("../src/assets/left1.png");
 
     Texture2D mainBackground = LoadTextureFromImage(backgroundImg); // Convert image to texture
     Texture2D startBtn = LoadTextureFromImage(startButton);
     Texture2D startBtnHover = LoadTextureFromImage(startButton);
+    Texture2D front = LoadTextureFromImage(frontImg);
+    Texture2D back = LoadTextureFromImage(backImg);
+    Texture2D right1 = LoadTextureFromImage(rightImg);
+    Texture2D left1 = LoadTextureFromImage(leftImg);
 
     UnloadImage(backgroundImg); //Unloading image since its value is given to texture
     UnloadImage(startButton);
+    UnloadImage(frontImg);
+    UnloadImage(backImg);
+    UnloadImage(rightImg);
+    UnloadImage(leftImg);
+
+    Vector2 RabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
 
     SetTargetFPS(60);   // Set game fps
 
