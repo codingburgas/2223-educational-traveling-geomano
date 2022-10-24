@@ -58,6 +58,30 @@ int main(void)
                 unloadMainMenu(mainBackground, startBtn, startBtnHover);
             }
 
+            if (IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D))
+        {
+            RabbitPosition.x += 2.0f;
+            DrawTextureV(right1, RabbitPosition, WHITE);
+        }
+
+        if (IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A))
+        {
+            RabbitPosition.x -= 2.0f;
+            DrawTextureV(left1, RabbitPosition, WHITE);
+        }
+
+        if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) 
+        {
+            RabbitPosition.y -= 2.0f;
+            DrawTextureV(back, RabbitPosition, WHITE);
+        }
+
+        if (IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S))
+        {
+            RabbitPosition.y += 2.0f;
+            DrawTextureV(front, RabbitPosition, WHITE);
+        }
+        
         EndDrawing();
     }
     CloseWindow();  // Close window
