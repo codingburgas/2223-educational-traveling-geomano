@@ -6,11 +6,10 @@ int main(void)
     // Initialization
     const int screenWidth = 960;   //Window size initialization
     const int screenHeight = 524;
-    
-    bool onMainMenu = 1;
 
     InitWindow(screenWidth, screenHeight, "Eurobunnea");    //Window initialization
-    
+    GameScreen currentScreen = TITLE;
+
     Image backgroundImg = LoadImage("../src/assets/main-menu-bg1.png"); //Image assets initialization
     Image startButton = LoadImage("../src/assets/main-menu-button.png");
     Image frontImg = LoadImage("../src/assets/front1.png");
@@ -33,7 +32,8 @@ int main(void)
     UnloadImage(rightImg);
     UnloadImage(leftImg);
 
-    Vector2 RabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    Vector2 rabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    int rabbitDirection = 0;
 
     SetTargetFPS(60);   // Set game fps
 
@@ -51,37 +51,68 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            if(onMainMenu == 1){
-            renderMainMenu(mainBackground, startBtn, startBtnHover,mousePos, &onMainMenu);
+            switch(currentScreen){
+                case TITLE:
+                renderMainMenu(mainBackground, startBtn, startBtnHover, mousePos, &currentScreen);
+                break;
+
+                case GAMEPLAY:{
+                    unloadMainMenu(mainBackground, startBtn, startBtnHover);
+
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)){
+
+                rabbitPosition.x += 2.0f;
+                DrawTextureV(right1, rabbitPosition, WHITE);
+                rabbitDirection = 1;
+
+            }
+            else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)){
+
+                rabbitPosition.x -= 2.0f;
+                DrawTextureV(left1, rabbitPosition, WHITE);
+                rabbitDirection = 2;
+
+                }   
+            else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)){
+
+            rabbitPosition.y -= 2.0f;
+            DrawTextureV(back, rabbitPosition, WHITE);
+            rabbitDirection = 3;
+
+            }
+
+            else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)){
+
+            rabbitPosition.y += 2.0f;
+            DrawTextureV(front, rabbitPosition, WHITE);
+            rabbitDirection = 4;
+
             }
             else{
-                unloadMainMenu(mainBackground, startBtn, startBtnHover);
+
+           switch (rabbitDirection)
+           {
+           case 1:
+            DrawTextureV(right1, rabbitPosition, WHITE);
+            break;
+            case 2:
+            DrawTextureV(left1, rabbitPosition, WHITE);
+            break;
+            case 3:
+            DrawTextureV(back, rabbitPosition, WHITE);
+            break;
+            case 4:
+            DrawTextureV(front, rabbitPosition, WHITE);
+            break;
+            default:
+            DrawTextureV(front, rabbitPosition, WHITE);
+            break;
+             }
+             break;
+            }
+            } 
             }
 
-            if (IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D))
-        {
-            RabbitPosition.x += 2.0f;
-            DrawTextureV(right1, RabbitPosition, WHITE);
-        }
-
-        if (IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A))
-        {
-            RabbitPosition.x -= 2.0f;
-            DrawTextureV(left1, RabbitPosition, WHITE);
-        }
-
-        if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) 
-        {
-            RabbitPosition.y -= 2.0f;
-            DrawTextureV(back, RabbitPosition, WHITE);
-        }
-
-        if (IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S))
-        {
-            RabbitPosition.y += 2.0f;
-            DrawTextureV(front, RabbitPosition, WHITE);
-        }
-        
         EndDrawing();
     }
     CloseWindow();  // Close window

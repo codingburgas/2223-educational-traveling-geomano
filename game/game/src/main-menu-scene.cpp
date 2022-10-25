@@ -1,7 +1,7 @@
 #include "include.hpp"
 #include "main-menu-scene.hpp" 
 
-void renderMainMenu(Texture2D mainBackground, Texture2D button, Texture2D buttonHover, Vector2 mousePos, bool* onMainMenu){
+void renderMainMenu(Texture2D mainBackground, Texture2D button, Texture2D buttonHover, Vector2 mousePos, GameScreen* state){
     DrawTexture(mainBackground,0, 0, WHITE);
     DrawTexture(button, 280, 312, WHITE);
 
@@ -12,22 +12,11 @@ void renderMainMenu(Texture2D mainBackground, Texture2D button, Texture2D button
          DrawTexture(buttonHover, 280, 312, WHITE);
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-            onMainMenu = 0;
+            *state = GAMEPLAY;
         }
      }
-    else
-    {
-        //DrawTexture(button, 280, 312, WHITE); 
-        UnloadTexture(buttonHover);
-         //button = buttonDefault;
-    }
-
     if (IsKeyReleased(KEY_ENTER)){
-        onMainMenu = 0;
-    }
-
-    if (onMainMenu == 0){
-        unloadMainMenu(mainBackground, button, buttonHover);
+        *state = GAMEPLAY;
     }
 }
 
