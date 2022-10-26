@@ -3,7 +3,5 @@
 #include "raylib.h"
 #include "rlgl.h"
 
-typedef enum GameScreen {TITLE, GAMEPLAY} GameScreen;
-
-#include "main-menu-scene.hpp"
+typedef enum GameScreen {TITLE, LEVELSELECT, GAMEPLAY} GameScreen;
 
