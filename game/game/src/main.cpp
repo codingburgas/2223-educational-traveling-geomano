@@ -17,7 +17,7 @@ int main(void)
 
     Texture2D startBtn = LoadTexture("../src/assets/main-menu-button.png");
     Texture2D startBtnHover = LoadTexture("../src/assets/main-menu-button.png");
-    Texture2D star = LoadTexture("../src/assets/main-menu-bg1.png");
+    Texture2D star = LoadTexture("../src/assets/star-select.png");
 
     Texture2D front = LoadTexture("../src/assets/front.png");
     Texture2D back = LoadTexture("../src/assets/back.png");
@@ -26,6 +26,7 @@ int main(void)
 
     Vector2 rabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
     int rabbitDirection = 0;
+    int countryChoice = 0;
 
     SetTargetFPS(60);   // Set game fps
 
@@ -49,8 +50,9 @@ int main(void)
                 break;
 
                 case LEVELSELECT:
+                DisableCursor();
                 unloadMainMenu(mainBackground, startBtn, startBtnHover);
-                renderLevelSelection(map, star, &currentScreen);
+                renderLevelSelection(map, star, &countryChoice, &currentScreen);
                 break;
 
                 case GAMEPLAY:

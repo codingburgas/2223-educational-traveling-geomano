@@ -4,4 +4,3 @@
 #include "rlgl.h"
 
 typedef enum GameScreen {TITLE, LEVELSELECT, GAMEPLAY} GameScreen;
-

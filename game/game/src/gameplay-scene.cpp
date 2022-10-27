@@ -1,11 +1,11 @@
 #include "include.hpp"
 #include "gameplay-scene.hpp"
 
-void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2D* front, Texture2D* left, Texture2D* right, Texture2D* back){
+void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2D* front, Texture2D* left, Texture2D* right, Texture2D* back) {
 
             Vector2 temp = *rabbitPosition;
 
-            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)){
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
                 temp.x += 2.0f;
                 *rabbitPosition = temp;
 
@@ -13,16 +13,14 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
                 *rabbitDirection = 1;
 
             }
-            else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)){
+            else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
                 temp.x -= 2.0f;
                 *rabbitPosition = temp;
 
                 DrawTextureV(*left, *rabbitPosition, WHITE);
                 *rabbitDirection = 2;
-
-                }   
-            else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)){
-
+            }   
+            else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
                 temp.y -= 2.0f;
                 *rabbitPosition = temp;
 
@@ -30,7 +28,7 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
                 *rabbitDirection = 3;
             }
 
-            else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)){
+            else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
 
             temp.y += 2.0f;
             *rabbitPosition = temp;
@@ -39,10 +37,8 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
             *rabbitDirection = 4;
 
             }
-            else{
-
-           switch (*rabbitDirection)
-           {
+        else {
+           switch (*rabbitDirection) {
            case 1:
             DrawTextureV(*right, *rabbitPosition, WHITE);
             break;
@@ -59,5 +55,5 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
             DrawTextureV(*front,* rabbitPosition, WHITE);
             break;
             }
-}
+        }
 }
