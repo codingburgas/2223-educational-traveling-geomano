@@ -23,11 +23,14 @@ int main(void)
     Texture2D back = LoadTexture("../src/assets/back.png");
     Texture2D right = LoadTexture("../src/assets/right.png");
     Texture2D left = LoadTexture("../src/assets/left.png");
+    Texture2D right2 = LoadTexture("../src/assets/right-2.png");
+    Texture2D left2 = LoadTexture("../src/assets/left-2.png");
 
     Vector2 rabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
     int rabbitDirection = 0;
     int countryChoice = 0;
-
+    float timer = 0.0f;
+    int frame = 0;
     SetTargetFPS(60);   // Set game fps
 
     while (!WindowShouldClose())    // Detect window close + main game loop
@@ -36,6 +39,13 @@ int main(void)
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
            Vector2 mousePos = GetMousePosition();
+           timer += GetFrameTime();
+           if (timer >= 0.2f) {
+            timer = 0.0f;
+            frame += 1;
+           }
+
+           frame = frame % 2;
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -57,7 +67,7 @@ int main(void)
 
                 case GAMEPLAY:
                 unloadMainMenu(mainBackground, startBtn, startBtnHover);
-                renderGameplayScene(&rabbitPosition, &rabbitDirection, &front, &left, &right, &back);
+                renderGameplayScene(&rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
                 break;
             }
 

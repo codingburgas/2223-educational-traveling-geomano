@@ -1,7 +1,7 @@
 #include "include.hpp"
 #include "gameplay-scene.hpp"
 
-void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2D* front, Texture2D* left, Texture2D* right, Texture2D* back) {
+void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
 
             Vector2 temp = *rabbitPosition;
 
@@ -9,7 +9,12 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
                 temp.x += 2.0f;
                 *rabbitPosition = temp;
 
-                DrawTextureV(*right, *rabbitPosition, WHITE);
+                if (frame == 1) {
+                    DrawTextureV(*right, *rabbitPosition, WHITE);
+                }
+                else {
+                    DrawTextureV(*right2, *rabbitPosition, WHITE);
+                }
                 *rabbitDirection = 1;
 
             }
@@ -17,7 +22,12 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, Texture2
                 temp.x -= 2.0f;
                 *rabbitPosition = temp;
 
-                DrawTextureV(*left, *rabbitPosition, WHITE);
+                 if (frame == 1) {
+                    DrawTextureV(*left, *rabbitPosition, WHITE);
+                }
+                else {
+                    DrawTextureV(*left2, *rabbitPosition, WHITE);
+                }
                 *rabbitDirection = 2;
             }   
             else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {

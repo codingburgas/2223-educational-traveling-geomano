@@ -14,6 +14,10 @@ void renderLevelSelection(Texture2D map, Texture2D star, int* countryChoice, Gam
             }
             else {
                 checkCountry(countryChoice, star);
+                
+                if (IsKeyPressed(KEY_ENTER)) {
+                    *state = GAMEPLAY;
+                }
             }
 
           
