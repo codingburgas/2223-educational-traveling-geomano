@@ -1,8 +1,7 @@
 #include "include.hpp"
 #include "gameplay-scene.hpp"
 
-void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
-
+void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
             Vector2 temp = *rabbitPosition;
 
             int radius = 92;
@@ -71,11 +70,11 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, int fram
             switch (*rabbitDirection) {
 
             case 1:
-            DrawTextureV(*right, *rabbitPosition, WHITE);
+            DrawTextureV(*right2, *rabbitPosition, WHITE);
             break;
 
             case 2:
-            DrawTextureV(*left,* rabbitPosition, WHITE);
+            DrawTextureV(*left2,* rabbitPosition, WHITE);
             break;
 
             case 3:
@@ -91,4 +90,37 @@ void renderGameplayScene(Vector2* rabbitPosition, int* rabbitDirection, int fram
             break;
             }
         }
+}
+
+void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back, Texture2D* background, Texture2D* goal) {
+    Vector2 temp = *rabbitPosition;
+    Rectangle goalLocation = {850, 400, 500, 500};
+
+    DrawTexture(*background, 0, 0, WHITE);
+    DrawTexture(*goal, 850, 400, WHITE);
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, left, left2, right, right2, back);
+    DrawText("Use WASD/ARROW KEYS to move. Use ENTER to confirm. Reach the star to proceed.", 40, 70, 20, GRAY);
+
+        if (CheckCollisionCircleRec(temp, 85 , goalLocation))
+        {
+            *state = LEVELSELECT;
+            rabbitPosition ->x = 960/2; 
+            rabbitPosition ->y = 524/2;
+        }
+}
+
+void renderItaly(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+
+}
+
+void renderFrance(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+
+}
+
+void renderSpain(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+
+}
+
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+
 }

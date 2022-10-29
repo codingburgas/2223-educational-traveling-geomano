@@ -49,3 +49,9 @@ void checkCountry(int *countryChoice, Texture2D star) {
             break;
             }
 }
+
+void unloadMap(Texture2D asset1, Texture2D asset2) {
+    UnloadTexture(asset1);
+    UnloadTexture(asset2); 
+    ClearBackground(RAYWHITE);
+}
