@@ -15,7 +15,13 @@ int main(void)
     Texture2D mainBackground = LoadTexture("../src/assets/main-menu-bg.png");   //Assets initialization
     Texture2D map = LoadTexture("../src/assets/level-select-map.png");
     Texture2D tutorialBackground = LoadTexture("../src/assets/tutorial-bg.png");
+    Texture2D franceBackground = LoadTexture("../src/assets/france-bg.png");
+    
     Texture2D goal = LoadTexture("../src/assets/star-select.png");
+    Texture2D textbox = LoadTexture("../src/assets/textbox.png");
+    Texture2D franceGirlIdle = LoadTexture("../src/assets/france-girl.png");
+    Texture2D franceGirlTalk = LoadTexture("../src/assets/france-girl-talk.png");
+    Texture2D rabbitDetailed = LoadTexture("../src/assets/bunny-large.png");
 
     Texture2D startBtn = LoadTexture("../src/assets/main-menu-button.png");
     Texture2D startBtnHover = LoadTexture("../src/assets/main-menu-button.png");
@@ -34,6 +40,9 @@ int main(void)
     float timer = 0.0f;
     int frame = 0;
     bool completedTotal[5] = {0, 0, 0, 0, 0};
+    int franceDialogue = 0;
+    bool isFrench = 1;
+    bool isFrenchTalking = 0;
     
     SetTargetFPS(60);   // Set game fps
 
@@ -88,7 +97,7 @@ int main(void)
                     break;
                     case 2:
                     completedTotal[2] = 1;
-                    renderFrance(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
+                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue);
                     break;
                     case 3:
                     completedTotal[3] = 1;

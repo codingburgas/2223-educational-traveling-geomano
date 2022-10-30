@@ -113,8 +113,34 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirectio
 
 }
 
-void renderFrance(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Texture2D* background, Texture2D* girlIdle, Texture2D* girlTalk, Texture2D* rabbitIdle, Texture2D* textbox, int* dialogueProgress) {
+   DrawTexture(*background, 0, 0, WHITE);
+   DrawTexture(*rabbitIdle, 600, 70, WHITE);
 
+   if (*isFrench == 1 && *isFrenchTalking == 1) {
+        DrawTexture(*girlTalk, 40, 40, WHITE);
+   }
+   else if (*isFrench == 1 && *isFrenchTalking == 0) {
+        DrawTexture(*girlIdle, 40, 40, WHITE);
+   }
+   else {
+   }
+
+   DrawTexture(*textbox, 0, 355, WHITE);
+
+   if(IsKeyPressed(KEY_ENTER)) {
+    *dialogueProgress += 1;
+   }
+   
+   switch(*dialogueProgress) {
+    case 1:
+    *isFrenchTalking = 1;
+    DrawText("Welcome!", 130, 420, 35, WHITE);
+    break;
+    default:
+    *isFrenchTalking = 0;
+    break;
+   }
 }
 
 void renderSpain(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
