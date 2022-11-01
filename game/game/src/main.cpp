@@ -16,6 +16,7 @@ int main(void)
     Texture2D map = LoadTexture("../src/assets/level-select-map.png");
     Texture2D tutorialBackground = LoadTexture("../src/assets/tutorial-bg.png");
     Texture2D franceBackground = LoadTexture("../src/assets/france-bg.png");
+    Texture2D bulgariaBackground = LoadTexture("../src/assets/bulgaria-maze.png");
     
     Texture2D goal = LoadTexture("../src/assets/star-select.png");
     Texture2D textbox = LoadTexture("../src/assets/textbox.png");
@@ -26,6 +27,7 @@ int main(void)
     Texture2D startBtn = LoadTexture("../src/assets/main-menu-button.png");
     Texture2D startBtnHover = LoadTexture("../src/assets/main-menu-button.png");
     Texture2D star = LoadTexture("../src/assets/star-select.png");
+    Texture2D rose = LoadTexture("../src/assets/rose.png");
 
     Texture2D front = LoadTexture("../src/assets/front.png");
     Texture2D back = LoadTexture("../src/assets/back.png");
@@ -34,7 +36,8 @@ int main(void)
     Texture2D right2 = LoadTexture("../src/assets/right-2.png");
     Texture2D left2 = LoadTexture("../src/assets/left-2.png");
 
-    Vector2 rabbitPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    Vector2 rabbitPosition = { 440, 420 };
+   
     int rabbitDirection = 0;
     int countryChoice = 0;
     float timer = 0.0f;
@@ -105,7 +108,7 @@ int main(void)
                     break;
                     case 4:
                     completedTotal[4] = 1;
-                    renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
+                    renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back, &bulgariaBackground, &rose);
                     break;
                     default:
                     currentScreen = LEVELSELECT;

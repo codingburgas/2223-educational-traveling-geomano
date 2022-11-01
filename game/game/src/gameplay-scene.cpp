@@ -104,8 +104,9 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
         if (CheckCollisionCircleRec(temp, 85 , goalLocation))
         {
             *state = LEVELSELECT;
-            rabbitPosition ->x = 960/2; 
-            rabbitPosition ->y = 524/2;
+            rabbitPosition ->x = 440; 
+            rabbitPosition ->y = 420;
+            *rabbitDirection = 3;
         }
 }
 
@@ -147,6 +148,43 @@ void renderSpain(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirectio
 
 }
 
-void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back, Texture2D* background, Texture2D* goal) {
+    DrawTexture(*background, 0, 0, WHITE);
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, left, left2, right, right2, back);
+    std::cout << rabbitPosition->x << " " << rabbitPosition->y << std::endl;
 
+    Rectangle collision1 = {50, 335, 30, 105};
+    Rectangle collision2 = {5, 135, 90, 30};
+    Rectangle collision3 = {60, 40, 105, 30};
+    Rectangle collision4 = {95, 235, 70, 30};
+    Rectangle collision5 = {150, 340, 30, 320};
+    Rectangle collision6 = {60, 40, 105, 30};
+
+    collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
+}
+
+void collisionCheck(Rectangle rec, Vector2* rabbitPosition, int *rabbitDirection, int radius) {
+    Vector2 temp = *rabbitPosition;
+    if (CheckCollisionCircleRec(temp, radius, rec)) {
+        if (*rabbitDirection == 1) {
+            temp.x -= 2.0f;
+            *rabbitPosition = temp;
+        }
+        else if (*rabbitDirection == 2) {
+            temp.x += 2.0f;
+            *rabbitPosition = temp;
+        }
+        else if (*rabbitDirection == 3) {
+            temp.y += 2.0f;
+            *rabbitPosition = temp;
+        }
+        else  {
+            temp.y -= 2.0f;
+            *rabbitPosition = temp;
+        }
+    }
 }
