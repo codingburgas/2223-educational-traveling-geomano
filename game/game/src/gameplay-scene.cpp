@@ -1,6 +1,28 @@
 #include "include.hpp"
 #include "gameplay-scene.hpp"
 
+using namespace std;
+
+struct frenchTest {
+    string frenchQuestions[10] = 
+    {
+        "Ten tons of brown paint is used to coat the Eiffel Tower every seven years.", //False
+        "The Alps run through France.", //True
+        "Paris was once originally a German city called 'Lutetia.'" //False
+        "France is the most visited country in the world with 83 million tourists.", //True
+        "There's only one stop sign in the entire city of Paris.", //True
+        "Louis XIX was king of France for just 30 minutes.", //False
+        "Potatoes were once illegal in France.", //True
+        "In France, it is legal to name a pig Napoleon.", //False
+        "The current president of France is Francois Hollande.", //False
+        "In France you can marry a dead person.", // True
+    }; 
+
+    bool frechAnswers[10] = {false, true, false, true, true, false, true, false, false, true};
+};
+
+int testScore = 0;
+
 void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
             Vector2 temp = *rabbitPosition;
 
@@ -118,6 +140,8 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    DrawTexture(*background, 0, 0, WHITE);
    DrawTexture(*rabbitIdle, 600, 70, WHITE);
 
+    frenchTest questionVar;
+
    if (*isFrench == 1 && *isFrenchTalking == 1) {
         DrawTexture(*girlTalk, 40, 40, WHITE);
    }
@@ -158,7 +182,7 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     Rectangle collision3 = {60, 40, 105, 30};
     Rectangle collision4 = {95, 235, 70, 30};
     Rectangle collision5 = {150, 340, 30, 320};
-    Rectangle collision6 = {60, 40, 105, 30};
+    //Rectangle collision6 = {60, 40, 105, 30};
 
     collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
