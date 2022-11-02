@@ -3,23 +3,20 @@
 
 using namespace std;
 
-struct frenchTest {
-    string frenchQuestions[10] = 
+struct franceTest {
+    string franceQuestions[7] = 
     {
-        "Ten tons of brown paint is used to coat the Eiffel Tower every seven years.", //False
         "The Alps run through France.", //True
-        "Paris was once originally a German city called 'Lutetia.'" //False
         "France is the most visited country in the world with 83 million tourists.", //True
-        "There's only one stop sign in the entire city of Paris.", //True
         "Louis XIX was king of France for just 30 minutes.", //False
-        "Potatoes were once illegal in France.", //True
+        "There's only one stop sign in the entire city of Paris.", //True
         "In France, it is legal to name a pig Napoleon.", //False
         "The current president of France is Francois Hollande.", //False
         "In France you can marry a dead person.", // True
     }; 
 
-    bool frechAnswers[10] = {false, true, false, true, true, false, true, false, false, true};
-};
+    bool franceAnswers[7] = {true, true, false, true, false, false, true};
+}franceVar;
 
 int testScore = 0;
 
@@ -140,8 +137,6 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    DrawTexture(*background, 0, 0, WHITE);
    DrawTexture(*rabbitIdle, 600, 70, WHITE);
 
-    frenchTest questionVar;
-
    if (*isFrench == 1 && *isFrenchTalking == 1) {
         DrawTexture(*girlTalk, 40, 40, WHITE);
    }
@@ -156,12 +151,74 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    if(IsKeyPressed(KEY_ENTER)) {
     *dialogueProgress += 1;
    }
-   
+
+    const char* temp;
+
+    int counter = 0;
+
    switch(*dialogueProgress) {
     case 1:
     *isFrenchTalking = 1;
     DrawText("Welcome!", 130, 420, 35, WHITE);
+    DrawText("I have some questions to you!", 130, 450, 35, WHITE);
     break;
+
+    case 2:
+    DrawText("I am ready!", 580, 420, 35, WHITE);
+    break;
+
+    case 3:
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 4:
+    counter+=1;
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 5:
+    counter+=2;
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 6:
+    counter+=3;
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 7:
+    counter+=4;
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 8:
+    counter+=5;
+    temp = franceVar.franceQuestions[counter].c_str();
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, WHITE);
+    DrawText("False", 740, 450, 35, WHITE);
+    break;
+
+    case 9:
+    temp = "You have received N carrots";
+    DrawText(temp, 130, 420, 25, WHITE);
+    break;
+
     default:
     *isFrenchTalking = 0;
     break;
