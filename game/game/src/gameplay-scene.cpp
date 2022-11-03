@@ -1,5 +1,6 @@
 #include "include.hpp"
 #include "gameplay-scene.hpp"
+#include <string>
 
 using namespace std;
 
@@ -19,6 +20,8 @@ struct franceTest {
 }franceVar;
 
 int testScore = 0;
+int select = 0;
+string newStr;
 
 void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
             Vector2 temp = *rabbitPosition;
@@ -173,14 +176,32 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     {
         *firstColor = WHITE;
         *secondColor = ORANGE;
+        select = 2;
     }
 
     if(IsKeyPressed(KEY_UP))
     {
         *firstColor = ORANGE;
         *secondColor = WHITE;
+        select = 1;
     }
- 
+
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
@@ -200,6 +221,22 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     {
         *firstColor = ORANGE;
         *secondColor = WHITE;
+    }
+
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
     }
 
     DrawText(temp, 130, 420, 25, WHITE);
@@ -223,6 +260,22 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
         *secondColor = WHITE;
     }
 
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
@@ -242,6 +295,22 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     {
         *firstColor = ORANGE;
         *secondColor = WHITE;
+    }
+
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
     }
 
     DrawText(temp, 130, 420, 25, WHITE);
@@ -265,6 +334,22 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
         *secondColor = WHITE;
     }
 
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
@@ -286,14 +371,47 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
         *secondColor = WHITE;
     }
 
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 9:
-    temp = "You have received N carrots";
+    temp = "You have received ";
     DrawText(temp, 130, 420, 25, WHITE);
+
+    newStr = to_string(testScore);
+    temp = newStr.c_str();
+    DrawText(temp, 370, 420, 25, WHITE);
+
+    if(testScore == 0 || testScore == 1)
+    {
+        temp = "carrot";
+    }
+
+    else
+    {
+        temp = " carrots";
+    }
+    
+    DrawText(temp, 390, 420, 25, WHITE);
+
     break;
 
     default:
