@@ -37,7 +37,9 @@ int main(void)
     Texture2D left2 = LoadTexture("../src/assets/left-2.png");
 
     Vector2 rabbitPosition = { 440, 420 };
-   
+    
+    Color firstColor = WHITE;
+    Color secondColor = WHITE;
     int rabbitDirection = 0;
     int countryChoice = 0;
     float timer = 0.0f;
@@ -100,7 +102,7 @@ int main(void)
                     break;
                     case 2:
                     completedTotal[2] = 1;
-                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue);
+                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue, &firstColor, &secondColor);
                     break;
                     case 3:
                     completedTotal[3] = 1;

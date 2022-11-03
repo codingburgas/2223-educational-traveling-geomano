@@ -7,11 +7,11 @@ struct franceTest {
     string franceQuestions[7] = 
     {
         "The Alps run through France.", //True
-        "France is the most visited country in the world with 83 million tourists.", //True
-        "Louis XIX was king of France for just 30 minutes.", //False
-        "There's only one stop sign in the entire city of Paris.", //True
+        "France is the most visited country in the '\n' world with 83 million tourists.", //True
+        "Louis XIX was king of France for '\n' just 30 minutes.", //False
+        "There's only one stop sign in '\n' the entire city of Paris.", //True
         "In France, it is legal to name a pig Napoleon.", //False
-        "The current president of France is Francois Hollande.", //False
+        "The current president of France '\n' is Francois Hollande.", //False
         "In France you can marry a dead person.", // True
     }; 
 
@@ -133,7 +133,7 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirectio
 
 }
 
-void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Texture2D* background, Texture2D* girlIdle, Texture2D* girlTalk, Texture2D* rabbitIdle, Texture2D* textbox, int* dialogueProgress) {
+void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Texture2D* background, Texture2D* girlIdle, Texture2D* girlTalk, Texture2D* rabbitIdle, Texture2D* textbox, int* dialogueProgress, Color *firstColor, Color *secondColor) {
    DrawTexture(*background, 0, 0, WHITE);
    DrawTexture(*rabbitIdle, 600, 70, WHITE);
 
@@ -153,8 +153,7 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    }
 
     const char* temp;
-
-    int counter = 0;
+    int indexCounter = 0;
 
    switch(*dialogueProgress) {
     case 1:
@@ -168,50 +167,128 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     break;
 
     case 3:
-    temp = franceVar.franceQuestions[counter].c_str();
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+ 
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 4:
-    counter+=1;
-    temp = franceVar.franceQuestions[counter].c_str();
+    indexCounter+=1;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 5:
-    counter+=2;
-    temp = franceVar.franceQuestions[counter].c_str();
+    indexCounter+=2;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 6:
-    counter+=3;
-    temp = franceVar.franceQuestions[counter].c_str();
+    indexCounter+=3;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 7:
-    counter+=4;
-    temp = franceVar.franceQuestions[counter].c_str();
+    indexCounter+=4;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 8:
-    counter+=5;
-    temp = franceVar.franceQuestions[counter].c_str();
+    indexCounter+=5;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
+
+    if(IsKeyPressed(KEY_DOWN))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
     DrawText(temp, 130, 420, 25, WHITE);
-    DrawText("True", 740, 415, 35, WHITE);
-    DrawText("False", 740, 450, 35, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 9:
