@@ -101,8 +101,7 @@ int main(void)
                     renderItaly(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
                     break;
                     case 2:
-                    completedTotal[2] = 1;
-                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue, &firstColor, &secondColor);
+                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue, &firstColor, &secondColor, &completedTotal[2]);
                     break;
                     case 3:
                     completedTotal[3] = 1;
