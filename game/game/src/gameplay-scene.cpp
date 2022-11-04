@@ -10,8 +10,8 @@ struct franceTest {
         "The Alps run through France.", //True
         "France is the most visited country in the '\n' world with 83 million tourists.", //True
         "Louis XIX was king of France for '\n' just 30 minutes.", //False
-        "There's only one stop sign in '\n' the entire city of Paris.", //True
-        "In France, it is legal to name a pig Napoleon.", //False
+        "There are not stop signs in '\n' the entire city of Paris.", //True
+        "In France it is legal to name a pig Napoleon.", //False
         "The current president of France '\n' is Francois Hollande.", //False
         "In France you can marry a dead person.", // True
     }; 
@@ -393,25 +393,79 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     break;
 
     case 9:
-    temp = "You have received ";
-    DrawText(temp, 130, 420, 25, WHITE);
+    indexCounter+=6;
+    temp = franceVar.franceQuestions[indexCounter].c_str();
 
-    newStr = to_string(testScore);
-    temp = newStr.c_str();
-    DrawText(temp, 370, 420, 25, WHITE);
-
-    if(testScore == 0 || testScore == 1)
+    if(IsKeyPressed(KEY_DOWN))
     {
-        temp = "carrot";
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+    }
+
+    if(IsKeyPressed(KEY_UP))
+    {
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+    }
+
+    if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    {
+        if(IsKeyPressed(KEY_RIGHT))
+        {
+            testScore++;
+        } 
+    }
+
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
+    break;
+
+    case 10:
+    if(testScore == 0)
+    {
+        DrawText("Sorry, you haven't received any carrots", 150, 420, 25, WHITE);
+    }
+
+    else if(testScore == 6)
+    {
+        DrawText("So close, you have received 6 carrots", 150, 420, 25, WHITE);
+    }
+
+    else if(testScore == 7)
+    {
+        DrawText("Brilliant, you have received all the 7 carrots", 150, 420, 25, WHITE);
     }
 
     else
     {
-        temp = " carrots";
-    }
-    
-    DrawText(temp, 390, 420, 25, WHITE);
+        temp = "You have received ";
+        DrawText(temp, 150, 420, 25, WHITE);
 
+        newStr = to_string(testScore);
+        temp = newStr.c_str();
+        DrawText(temp, 390, 420, 25, WHITE);
+
+        if(testScore == 1)
+        {
+            temp = "carrot";
+        }
+
+        else
+        {
+            temp = " carrots";
+        }
+
+        DrawText(temp, 405, 420, 25, WHITE);
+    }
     break;
 
     default:
