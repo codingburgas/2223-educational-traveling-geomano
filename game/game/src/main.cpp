@@ -45,9 +45,13 @@ int main(void)
     float timer = 0.0f;
     int frame = 0;
     bool completedTotal[5] = {0, 0, 0, 0, 0};
+
     int franceDialogue = 0;
     bool isFrench = 1;
     bool isFrenchTalking = 0;
+    int franceDialogueCounter = 0;
+    questionPts franceQuestions;
+    questionPts tempCorrect;
     
     SetTargetFPS(60);   // Set game fps
 
@@ -101,7 +105,7 @@ int main(void)
                     renderItaly(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
                     break;
                     case 2:
-                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue, &firstColor, &secondColor, &completedTotal[2]);
+                    renderFrance(&currentScreen, &isFrench, &isFrenchTalking, &franceBackground, &franceGirlIdle, &franceGirlTalk, &rabbitDetailed, &textbox, &franceDialogue, &firstColor, &secondColor, &franceDialogueCounter, &franceQuestions, &tempCorrect, &completedTotal[2]);
                     break;
                     case 3:
                     completedTotal[3] = 1;

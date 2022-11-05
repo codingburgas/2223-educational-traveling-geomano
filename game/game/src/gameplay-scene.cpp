@@ -16,7 +16,7 @@ struct franceTest {
         "In France you can marry a dead person.", // True
     }; 
 
-    bool franceAnswers[7] = {true, true, false, true, false, false, true};
+    bool franceAnswers[20] = {true, true, false, true, false, false, true, false, false, false, false, false, false};
 }franceVar;
 
 int testScore = 0;
@@ -136,25 +136,23 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirectio
 
 }
 
- void correctAnswerFrance(int indexCounter) {
-     if(select == 1 && franceVar.franceAnswers[indexCounter] == true)
-    {
-       if(IsKeyPressed(KEY_ENTER))
-        {
-            testScore++;
-        }  
-    }
+ void optionPickFrance(int indexCounter, Color* firstColor, Color* secondColor) {
 
-    if(select == 2 && franceVar.franceAnswers[indexCounter] == false)
+    if(IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W))
     {
-       if(IsKeyPressed(KEY_ENTER))
-        {
-            testScore++;
-        }  
+        *firstColor = ORANGE;
+        *secondColor = WHITE;
+        select = 1;
+    }
+    else if(IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S))
+    {
+        *firstColor = WHITE;
+        *secondColor = ORANGE;
+        select = 2;
     }
 }
 
-void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Texture2D* background, Texture2D* girlIdle, Texture2D* girlTalk, Texture2D* rabbitIdle, Texture2D* textbox, int* dialogueProgress, Color *firstColor, Color *secondColor, bool* isCompleted) {
+void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Texture2D* background, Texture2D* girlIdle, Texture2D* girlTalk, Texture2D* rabbitIdle, Texture2D* textbox, int* dialogueProgress, Color *firstColor, Color *secondColor, int* indexCounter, questionPts* isCorrect, questionPts* tempCorrect, bool* isCompleted) {
    DrawTexture(*background, 0, 0, WHITE);
    DrawTexture(*rabbitIdle, 600, 70, WHITE);
 
@@ -168,15 +166,67 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    }
 
    DrawTexture(*textbox, 0, 355, WHITE);
+    
+    std::cout << *dialogueProgress - 3 << " " << select << endl;
 
    if(IsKeyPressed(KEY_ENTER)) {
     *dialogueProgress += 1;
     *firstColor = WHITE;
     *secondColor = WHITE;
-   }
+
+       if(IsKeyPressed(KEY_ENTER))
+        {
+            switch (*dialogueProgress)
+            {
+            case 4:
+            if (select == 1)
+               { isCorrect->Q1 = 1;}
+                
+                break;
+            
+             case 5:
+            if (select == 1)
+               { isCorrect->Q2 = 1;}
+
+                break;
+            
+             case 6:
+            if (select == 2)
+                {isCorrect->Q3 = 1;}
+
+                break;
+
+             case 7:
+            if (select == 1)
+                {isCorrect->Q4 = 1;}
+
+                break;
+
+             case 8:
+            if (select == 2)
+                {isCorrect->Q5 = 1;}
+
+                break;
+
+             case 9:
+            if (select == 2)
+                {isCorrect->Q6 = 1;}
+
+                break;
+
+             case 10:
+            if (select == 1)
+               { isCorrect->Q7 = 1;}
+
+                break;
+
+            default:
+                break;
+            }
+        }  
+    }
 
     const char* temp;
-    int indexCounter = 0;
 
    switch(*dialogueProgress) {
     case 1:
@@ -192,23 +242,9 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
 
     case 3:
     *isFrenchTalking = 1;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+    temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-        select = 2;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-        select = 1;
-    }
-
-    correctAnswerFrance(indexCounter);
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
     
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
@@ -216,153 +252,159 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
     break;
 
     case 4:
-    indexCounter+=1;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+    temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-    }
-
-   correctAnswerFrance(indexCounter);
-
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 5:
-    indexCounter+=2;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+    temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-    }
-
-    correctAnswerFrance(indexCounter);
-
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 6:
-    indexCounter+=3;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+     temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-    }
-
-    correctAnswerFrance(indexCounter);
-
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 7:
-    indexCounter+=4;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+    temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-    }
-
-    correctAnswerFrance(indexCounter);
-
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 8:
-    indexCounter+=5;
-    temp = franceVar.franceQuestions[indexCounter].c_str();
+     temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
 
-    if(IsKeyPressed(KEY_DOWN))
-    {
-        *firstColor = WHITE;
-        *secondColor = ORANGE;
-    }
-
-    if(IsKeyPressed(KEY_UP))
-    {
-        *firstColor = ORANGE;
-        *secondColor = WHITE;
-    }
-
-    correctAnswerFrance(indexCounter);
-
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
     DrawText(temp, 130, 420, 25, WHITE);
     DrawText("True", 740, 415, 35, *firstColor);
     DrawText("False", 740, 450, 35, *secondColor);
     break;
 
     case 9:
+     temp = franceVar.franceQuestions[*dialogueProgress-3].c_str();
+
+    optionPickFrance(*dialogueProgress-3, firstColor, secondColor);
+    
+    DrawText(temp, 130, 420, 25, WHITE);
+    DrawText("True", 740, 415, 35, *firstColor);
+    DrawText("False", 740, 450, 35, *secondColor);
+    break;
+
+    case 10:
+     DrawText("That's it!", 130, 440, 35, WHITE);
+    *tempCorrect = *isCorrect;
+    break;
+
+    case 11:
     *isFrenchTalking = 0;
-    temp = "You have received ";
-    DrawText(temp, 130, 420, 25, GRAY);
+    
+    DrawText("Correct:", 370, 420, 25, ORANGE);
+    if(isCorrect->Q1 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q2 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q3 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q4 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q5 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q6 == 1)
+    testScore += 1;
+
+    if(isCorrect->Q7 == 1)
+    testScore += 1;
 
     newStr = to_string(testScore);
     temp = newStr.c_str();
+    DrawText(temp, 480, 420, 25, YELLOW);
 
-    if (testScore == 0) {
-     DrawText("no", 370, 420, 25, GRAY);
-    }
-    else {
-    DrawText(temp, 370, 420, 25, ORANGE);
-    }
-    if(testScore == 1)
-    {
-        temp = "carrot.";
-    }
-
-
-    else if(testScore == 7)
-    {
-        DrawText("Brilliant, you have received all the 7 carrots", 150, 420, 25, WHITE);
-    }
+    if(testScore > 5)
+    DrawText("You passed!", 520, 423, 20, GRAY);
+    isCorrect->Q1 = 0;
+    isCorrect->Q2 = 0;
+    isCorrect->Q3 = 0;
+    isCorrect->Q4 = 0;
+    isCorrect->Q5 = 0;
+    isCorrect->Q6 = 0;
+    isCorrect->Q7 = 0;
     
+    if(tempCorrect->Q1 == 1) {
+        DrawText("Q1", 300, 460, 20, ORANGE);
+    }else {
+        DrawText("Q1", 300, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q2 == 1) {
+        DrawText("Q2", 340, 460, 20, ORANGE);
+    }else {
+        DrawText("Q2", 340, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q3 == 1) {
+        DrawText("Q3", 380, 460, 20, ORANGE);
+    }else {
+        DrawText("Q3", 380, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q4 == 1) {
+        DrawText("Q4", 420, 460, 20, ORANGE);
+    }else {
+        DrawText("Q4", 420, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q5 == 1) {
+        DrawText("Q5", 460, 460, 20, ORANGE);
+    }else {
+        DrawText("Q5", 460, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q6 == 1) {
+        DrawText("Q6", 500, 460, 20, ORANGE);
+    }else {
+        DrawText("Q6", 500, 460, 20, GRAY);
+    }
+
+    if(tempCorrect->Q7 == 1) {
+        DrawText("Q7", 540, 460, 20, ORANGE);
+    }else {
+        DrawText("Q7", 540, 460, 20, GRAY);
+    }
+
     break;
-    case 10:
-    *dialogueProgress = 0;
+    case 12:
     if (testScore > 5) {
         *isCompleted = true;
     }
     *state = LEVELSELECT;
     testScore = 0;
+    *dialogueProgress = 0;
 
     default:
     *isFrenchTalking = 0;
