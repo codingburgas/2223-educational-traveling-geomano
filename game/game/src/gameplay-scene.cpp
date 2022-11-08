@@ -423,16 +423,29 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
 
     Rectangle collision1 = {50, 335, 30, 105};
     Rectangle collision2 = {5, 135, 90, 30};
-    Rectangle collision3 = {60, 40, 105, 30};
-    Rectangle collision4 = {95, 235, 70, 30};
-    Rectangle collision5 = {150, 340, 30, 320};
-    //Rectangle collision6 = {60, 40, 105, 30};
+    Rectangle collision3 = {60, 40, 125, 30};
+    Rectangle collision4 = {155, 80, 30, 260};
+    Rectangle collision5 = {95, 235, 30, 15};
+    Rectangle collision6 = {200, 130, 80, 25};
+    Rectangle collision7 = {205, 330, 400, 15};
+    Rectangle collision8 = {265, 235, 25, 105};
+    Rectangle collision9 = {375, 235, 25, 105};
+    Rectangle collision10 = {375, 235, 120, 20};
+    Rectangle collision11 = {255, 0, 30, 40};
+    Rectangle collision12 = {365, 0, 30, 40};
 
     collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision6, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision7, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision8, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision9, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision10, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision11, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision12, rabbitPosition, rabbitDirection, 20);
 }
 
 void collisionCheck(Rectangle rec, Vector2* rabbitPosition, int *rabbitDirection, int radius) {
