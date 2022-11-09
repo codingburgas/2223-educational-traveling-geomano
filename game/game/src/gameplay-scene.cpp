@@ -23,7 +23,7 @@ int testScore = 0;
 int select = 0;
 string newStr;
 
-void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) {
+void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2) {
             Vector2 temp = *rabbitPosition;
 
             int radius = 92;
@@ -37,53 +37,95 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
                 }
 
                 if (frame == 1) {
+                    DrawTextureV(*right2, *rabbitPosition, WHITE);
+                    }
+                else if (frame == 2) {
                     DrawTextureV(*right, *rabbitPosition, WHITE);
+                    temp.y -= 0.3f;
+                    *rabbitPosition = temp;
                 }
-                else {
+                else if (frame == 3) {
                     DrawTextureV(*right2, *rabbitPosition, WHITE);
                 }
+                else {
+                    temp.y += 0.3f;
+                    *rabbitPosition = temp;
+                    DrawTextureV(*rightWalk2, *rabbitPosition, WHITE);
+                }
                 *rabbitDirection = 1;
-
             }
 
             else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) 
             {
-                if (temp.x != 8)
+                if (!(temp.x < 8))
                 {
                     temp.x -= 2.0f;
                     *rabbitPosition = temp;
                 }
 
-                 if (frame == 1) {
-                    DrawTextureV(*left, *rabbitPosition, WHITE);
-                    }
-                else {
+                if (frame == 1) {
                     DrawTextureV(*left2, *rabbitPosition, WHITE);
+                    }
+                else if (frame == 2) {
+                    DrawTextureV(*left, *rabbitPosition, WHITE);
+                    temp.y -= 0.3f;
+                    *rabbitPosition = temp;
+                }
+                else if (frame == 3) {
+                    DrawTextureV(*left2, *rabbitPosition, WHITE);
+                }
+                else {
+                    temp.y += 0.3f;
+                    *rabbitPosition = temp;
+                    DrawTextureV(*leftWalk2, *rabbitPosition, WHITE);
                 }
                 *rabbitDirection = 2;
             }   
 
-            else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) 
-            {  
-                if(temp.y != 8)
+            else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {  
+                if(!(temp.y < 3))
                 {
                     temp.y -= 2.0f;
                     *rabbitPosition = temp;
                 }
                     
-                DrawTextureV(*back, *rabbitPosition, WHITE);
+                if (frame == 1) {
+                    DrawTextureV(*backWalk1, *rabbitPosition, WHITE);
+                    }
+                else if (frame == 2) {
+                    DrawTextureV(*backIdle, *rabbitPosition, WHITE);
+                    temp.y += 0.4f;
+                    *rabbitPosition = temp;
+                }
+                else if (frame == 3) {
+                    DrawTextureV(*backWalk2, *rabbitPosition, WHITE);
+                }
+                else {
+                    DrawTextureV(*backWalk1, *rabbitPosition, WHITE);
+                }
                 *rabbitDirection = 3;
             }
 
-            else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
-            {
-                if (temp.y < (GetScreenHeight() - radius))
-                {
+            else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+                if (temp.y < (GetScreenHeight() - radius)) {
                     temp.y += 2.0f;
                     *rabbitPosition = temp;
                 }
 
-                DrawTextureV(*front, *rabbitPosition, WHITE);
+               if (frame == 1) {
+                    DrawTextureV(*frontWalk1, *rabbitPosition, WHITE);
+                    }
+                else if (frame == 2) {
+                    DrawTextureV(*frontIdle, *rabbitPosition, WHITE);
+                    temp.y -= 0.4f;
+                    *rabbitPosition = temp;
+                }
+                else if (frame == 3) {
+                    DrawTextureV(*frontWalk2, *rabbitPosition, WHITE);
+                }
+                else {
+                    DrawTextureV(*frontWalk1, *rabbitPosition, WHITE);
+                }
                 *rabbitDirection = 4;
             }
 
@@ -100,27 +142,38 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
             break;
 
             case 3:
-            DrawTextureV(*back, *rabbitPosition, WHITE);
+            if (frame == 1 || frame == 3 || frame == 4)
+                DrawTextureV(*back, *rabbitPosition, WHITE);
+            else 
+                DrawTextureV(*backIdle, *rabbitPosition, WHITE);
+
             break;
 
             case 4:
-            DrawTextureV(*front,* rabbitPosition, WHITE);
+            if (frame == 1 || frame == 3 || frame == 4)
+                DrawTextureV(*front, *rabbitPosition, WHITE);
+            else 
+                DrawTextureV(*frontIdle, *rabbitPosition, WHITE);
+
             break;
             
             default:
-            DrawTextureV(*front,* rabbitPosition, WHITE);
+             if (frame == 1 || frame == 3)
+                DrawTextureV(*front, *rabbitPosition, WHITE);
+            else 
+                DrawTextureV(*frontIdle, *rabbitPosition, WHITE);
             break;
             }
         }
 }
 
-void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back, Texture2D* background, Texture2D* goal) {
+void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal) {
     Vector2 temp = *rabbitPosition;
     Rectangle goalLocation = {850, 400, 500, 500};
 
     DrawTexture(*background, 0, 0, WHITE);
     DrawTexture(*goal, 850, 400, WHITE);
-    renderRabbit(rabbitPosition, rabbitDirection, frame, front, left, left2, right, right2, back);
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
     DrawText("Use WASD/ARROW KEYS to move. Use ENTER to confirm. Reach the star to proceed.", 40, 70, 20, GRAY);
 
         if (CheckCollisionCircleRec(temp, 85 , goalLocation))
@@ -416,9 +469,9 @@ void renderSpain(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirectio
 
 }
 
-void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back, Texture2D* background, Texture2D* goal) {
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal) {
     DrawTexture(*background, 0, 0, WHITE);
-    renderRabbit(rabbitPosition, rabbitDirection, frame, front, left, left2, right, right2, back);
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
     std::cout << rabbitPosition->x << " " << rabbitPosition->y << std::endl;
 
     Rectangle collision1 = {50, 335, 30, 105};

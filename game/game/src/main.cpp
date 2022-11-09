@@ -30,11 +30,21 @@ int main(void)
     Texture2D rose = LoadTexture("../src/assets/rose.png");
 
     Texture2D front = LoadTexture("../src/assets/front.png");
+    Texture2D frontIdle = LoadTexture("../src/assets/front-2.png");
+    Texture2D frontWalk1 = LoadTexture("../src/assets/front-walk-1.png");
+    Texture2D frontWalk2 = LoadTexture("../src/assets/front-walk-2.png");
+    
     Texture2D back = LoadTexture("../src/assets/back.png");
-    Texture2D right = LoadTexture("../src/assets/right.png");
+    Texture2D backIdle = LoadTexture("../src/assets/back-2.png");
+    Texture2D backWalk1 = LoadTexture("../src/assets/back-walk-1.png");
+    Texture2D backWalk2 = LoadTexture("../src/assets/back-walk-2.png");
+
     Texture2D left = LoadTexture("../src/assets/left.png");
-    Texture2D right2 = LoadTexture("../src/assets/right-2.png");
     Texture2D left2 = LoadTexture("../src/assets/left-2.png");
+    Texture2D leftWalk2 = LoadTexture("../src/assets/left-walk-2.png");
+    Texture2D right = LoadTexture("../src/assets/right.png");
+    Texture2D right2 = LoadTexture("../src/assets/right-2.png");
+    Texture2D rightWalk2 = LoadTexture("../src/assets/right-walk-2.png");
 
     Vector2 rabbitPosition = { 440, 420 };
     
@@ -62,12 +72,12 @@ int main(void)
         // TODO: Update your variables here
            Vector2 mousePos = GetMousePosition();
            timer += GetFrameTime();
-           if (timer >= 0.2f) {
+           if (timer >= 0.4f) {
             timer = 0.0f;
-            frame += 1;
+            frame += 4;
            }
 
-           frame = frame % 2;
+           frame = frame % 3;
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -98,7 +108,7 @@ int main(void)
                 switch (countryChoice) {
                 case 0:
                     completedTotal[0] = 1;
-                    renderTutorial(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back, &tutorialBackground, &goal);
+                    renderTutorial(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &tutorialBackground, &goal);
                     break;
                     case 1:
                     completedTotal[1] = 1;
@@ -113,7 +123,7 @@ int main(void)
                     break;
                     case 4:
                     completedTotal[4] = 1;
-                    renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back, &bulgariaBackground, &rose);
+                    renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, &rose);
                     break;
                     default:
                     currentScreen = LEVELSELECT;
