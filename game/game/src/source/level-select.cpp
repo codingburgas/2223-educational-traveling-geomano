@@ -72,7 +72,6 @@ void unloadMap(Texture2D asset1, Texture2D asset2)
     UnloadTexture(asset1);
     UnloadTexture(asset2); 
 
-
     // Set the background colour to raywhite
     ClearBackground(RAYWHITE);
 }
