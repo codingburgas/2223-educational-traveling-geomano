@@ -1,6 +1,6 @@
-#include "include.hpp"
-#include "gameplay-scene.hpp"
 #include <string>
+#include "../headers/include.hpp"
+#include "../headers/gameplay-scene.hpp"
 
 using namespace std;
 

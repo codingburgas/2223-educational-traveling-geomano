@@ -1,7 +1,7 @@
-#include "include.hpp"
-#include "main-menu-scene.hpp"
-#include "level-select.hpp"
-#include "gameplay-scene.hpp"
+#include "../headers/include.hpp"
+#include "../headers/main-menu-scene.hpp"
+#include "../headers/level-select.hpp"
+#include "../headers/gameplay-scene.hpp"
 
 int main(void)
 {

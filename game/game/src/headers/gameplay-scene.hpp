@@ -1,4 +1,5 @@
 #pragma once
+
 #include "include.hpp"
 
 void correctAnswerFrance(int* indexCounter, Color* firstColor, Color* secondColor, int* dialogueProgress);

@@ -1,5 +1,5 @@
-#include "include.hpp"
-#include "level-select.hpp"
+#include "../headers/include.hpp"
+#include "../headers/level-select.hpp"
 
 void renderLevelSelection(Texture2D map, Texture2D star, int* countryChoice, GameScreen* state) {
         DrawTexture(map, 0, 0, WHITE);
