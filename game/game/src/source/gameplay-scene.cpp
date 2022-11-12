@@ -38,14 +38,14 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     // Navigate rabbit movement via Right key or D key
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) 
     {   
-        // Check if the rabbit is in the screen
+        // Check if the rabbit is in screen bounds
         if (temp.x < (GetScreenWidth() - radius)) 
         {
             temp.x += 2.0f;
             *rabbitPosition = temp;
         }
 
-        // Draw the appropiate right texture
+        // Draw right texture
         if (frame == 1) 
         {
             DrawTextureV(*right2, *rabbitPosition, WHITE);
@@ -54,7 +54,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
         else if (frame == 2) 
         {
             DrawTextureV(*right, *rabbitPosition, WHITE);
-            temp.y -= 0.3f;
+            temp.y -= 0.05f;
             *rabbitPosition = temp;
         }
 
@@ -65,7 +65,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
 
         else 
         {
-            temp.y += 0.3f;
+            temp.y += 0.05f;
             *rabbitPosition = temp;
             DrawTextureV(*rightWalk2, *rabbitPosition, WHITE);
         }
@@ -76,7 +76,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     // Navigate rabbit movement via Left key or A key
     else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) 
     {
-        // Check if the rabbit is in the screen
+        // Check if the rabbit is in screen bounds
         if (!(temp.x < 8))
         {
             temp.x -= 2.0f;
@@ -92,7 +92,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
         else if (frame == 2) 
         {
             DrawTextureV(*left, *rabbitPosition, WHITE);
-            temp.y -= 0.3f;
+            temp.y -= 0.05f;
             *rabbitPosition = temp;
         }
 
@@ -103,7 +103,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
 
         else 
         {
-            temp.y += 0.3f;
+            temp.y += 0.05f;
             *rabbitPosition = temp;
             DrawTextureV(*leftWalk2, *rabbitPosition, WHITE);
         }
@@ -114,7 +114,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     // Navigate rabbit movement via Up key or W key
     else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) 
     {  
-        // Check if the rabbit is in the screen
+        // Check if the rabbit is in screen bounds
         if(!(temp.y < 3))
         {
             temp.y -= 2.0f;
@@ -130,7 +130,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
         else if (frame == 2) 
         {
             DrawTextureV(*backIdle, *rabbitPosition, WHITE);
-            temp.y += 0.4f;
+            temp.y += 0.f;
             *rabbitPosition = temp;
         }
 
@@ -150,7 +150,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     // Navigate rabbit movement via Down key or S key
     else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) 
     {
-        // Check if the rabbit is in the screen
+        // Check if the rabbit is in screen bounds
         if (temp.y < (GetScreenHeight() - radius)) 
         {
             temp.y += 2.0f;
@@ -185,7 +185,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
 
     else 
     {
-        // Draw the appropiate texture (right, left, back or front)
+        // Draw the appropiate idle texture (right, left, back or front)
         switch (*rabbitDirection)
         {
             case 1:

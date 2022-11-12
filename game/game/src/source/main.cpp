@@ -17,6 +17,7 @@ int main(void)
 
     // Assets initialization
     Texture2D mainBackground = LoadTexture("../src/assets/main-menu-bg.png");   
+    Texture2D exitBackground = LoadTexture("../src/assets/exit-request-bg.png");
     Texture2D map = LoadTexture("../src/assets/level-select-map.png");
     Texture2D tutorialBackground = LoadTexture("../src/assets/tutorial-bg.png");
     Texture2D franceBackground = LoadTexture("../src/assets/france-bg.png");
@@ -51,7 +52,7 @@ int main(void)
     Texture2D rightWalk2 = LoadTexture("../src/assets/right-walk-2.png");
     
     // Initilize the necessary variables
-
+    
     // X and Y position of the rabbit
     Vector2 rabbitPosition = { 440, 420 };
     
@@ -71,13 +72,17 @@ int main(void)
     questionPts franceQuestions;
     questionPts tempCorrect;
     
+    SetExitKey(KEY_NULL); //set exit key to make custom exit request
+    bool exitWindowRequested = false;   // Flag to request window to exit
+    bool exitWindow = false;
+
     // Set game FPS
     SetTargetFPS(60);   
 
     // Detect window close and main game loop
-    while (!WindowShouldClose())    
+    while (!exitWindow)    
     {
-        // Update the variables here
+        // Update variables here
         Vector2 mousePos = GetMousePosition();
         timer += GetFrameTime();
         if (timer >= 0.4f) 
@@ -88,13 +93,30 @@ int main(void)
 
         frame = frame % 3;
 
+        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
+
+        if (exitWindowRequested) //Check if player has pressed exit key
+        {
+            if (IsKeyPressed(KEY_Y)) exitWindow = true; //check for player confirmation
+            else if (IsKeyPressed(KEY_N)) exitWindowRequested = false;
+        }
+
         // Begin drawing
         BeginDrawing();
 
         //Clear the colour of the background
         ClearBackground(RAYWHITE);
 
-        //Check what is the current state of the screen
+        //Check current screen state
+
+         if (exitWindowRequested)
+            {
+                DrawTexture(exitBackground, 0, 0, WHITE);
+                DrawText("Would you like to exit?", 280, 230, 30, WHITE);
+                DrawText("[Y/N]", 430, 280, 40, ORANGE);
+            }
+        else 
+        {
         switch(currentScreen)
         {
             case TITLE:
@@ -103,7 +125,6 @@ int main(void)
 
             case LEVELSELECT:
             DisableCursor();
-            unloadMenu(mainBackground, startBtn, startBtnHover);
             renderLevelSelection(map, star, &countryChoice, &currentScreen);
 
             //Check if any country game is completed
@@ -148,7 +169,7 @@ int main(void)
             }
             break;
         }
-
+        }
         // End drawing
         EndDrawing();
     }
