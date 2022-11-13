@@ -13,15 +13,23 @@ int main(void)
 
     // Window initialization
     InitWindow(screenWidth, screenHeight, "Eurobunnea");    
-    GameScreen currentScreen = TITLE;
+    GameScreen currentScreen = INTRO;
 
     // Assets initialization
+    Texture2D introScreen1 = LoadTexture("../src/assets/intro-screen-1.png");
+    Texture2D introScreen2 = LoadTexture("../src/assets/intro-screen-2.png");
+    Texture2D introScreen3 = LoadTexture("../src/assets/intro-screen-3.png");
+    Texture2D introScreen4 = LoadTexture("../src/assets/intro-screen-4.png");
+
     Texture2D mainBackground = LoadTexture("../src/assets/main-menu-bg.png");   
     Texture2D exitBackground = LoadTexture("../src/assets/exit-request-bg.png");
     Texture2D map = LoadTexture("../src/assets/level-select-map.png");
     Texture2D tutorialBackground = LoadTexture("../src/assets/tutorial-bg.png");
     Texture2D franceBackground = LoadTexture("../src/assets/france-bg.png");
     Texture2D bulgariaBackground = LoadTexture("../src/assets/bulgaria-maze.png");
+    Texture2D italyBackground1 = LoadTexture("../src/assets/italy-bg-1.png"); 
+    Texture2D italyBackground2 = LoadTexture("../src/assets/italy-bg-2.png"); 
+    Texture2D italyBackground3 = LoadTexture("../src/assets/italy-bg-3.png"); 
     
     Texture2D goal = LoadTexture("../src/assets/star-select.png");
     Texture2D textbox = LoadTexture("../src/assets/textbox.png");
@@ -51,15 +59,20 @@ int main(void)
     Texture2D right2 = LoadTexture("../src/assets/right-2.png");
     Texture2D rightWalk2 = LoadTexture("../src/assets/right-walk-2.png");
     
+    Texture2D boatRabbit1 = LoadTexture("../src/assets/italy-rabbit-1.png");
+    Texture2D boatRabbit2 = LoadTexture("../src/assets/italy-rabbit-2.png");
+    Texture2D boatRabbit3 = LoadTexture("../src/assets/italy-rabbit-3.png");
     // Initilize the necessary variables
     
     // X and Y position of the rabbit
     Vector2 rabbitPosition = { 440, 420 };
+    Vector2 rabbitBoatPosition = { 0, 295 };
     
     Color firstColor = WHITE;
     Color secondColor = WHITE;
 
     int frame = 0;
+    int frameIntroCount = 0;
     int franceDialogue = 0;
     int rabbitDirection = 0;
     int countryChoice = 0;
@@ -92,6 +105,7 @@ int main(void)
         }
 
         frame = frame % 3;
+        frameIntroCount = frameIntroCount + 1;
 
         if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
 
@@ -119,6 +133,38 @@ int main(void)
         {
         switch(currentScreen)
         {
+            case INTRO:
+            {
+                std::cout << " " << (frameIntroCount/30)  << " ";
+                DrawTexture(mainBackground, 0, 0, WHITE);
+            
+                if (((frameIntroCount/10)) < 3)
+                {
+                    DrawTexture(introScreen1, 0, 0, WHITE);
+                }
+                else if (((frameIntroCount/10)) == 3)
+                {
+                    UnloadTexture(introScreen1);
+                    DrawTexture(introScreen2, 0, 0, WHITE);
+                }
+                else if (((frameIntroCount/10)) == 4)
+                {
+                    UnloadTexture(introScreen2);
+                    DrawTexture(introScreen3, 0, 0, WHITE);
+                }
+                else if (((frameIntroCount/10)) == 5)
+                {
+                    UnloadTexture(introScreen3);
+                    DrawTexture(introScreen4, 0, 0, WHITE);
+                }
+                else if (((frameIntroCount/10)) == 6)
+                {
+                    UnloadTexture(introScreen4);
+                    currentScreen = TITLE;
+                }
+
+            break;
+            }
             case TITLE:
             renderMainMenu(mainBackground, startBtn, startBtnHover, mousePos, &currentScreen);
             break;
@@ -146,7 +192,7 @@ int main(void)
 
                 case 1:
                 completedTotal[1] = 1;
-                renderItaly(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
+                renderItaly(&currentScreen, &rabbitBoatPosition, frame, &boatRabbit1, &boatRabbit2, &boatRabbit3, italyBackground1, italyBackground2, italyBackground3);
                 break;
 
                 case 2:

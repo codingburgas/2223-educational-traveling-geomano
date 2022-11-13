@@ -4,7 +4,7 @@
 #include "raylib.h"
 #include "rlgl.h"
 
-typedef enum GameScreen {TITLE, LEVELSELECT, GAMEPLAY} GameScreen;
+typedef enum GameScreen {INTRO, TITLE, LEVELSELECT, GAMEPLAY} GameScreen;
 class questionPts {
         public:
         bool Q1 = false;

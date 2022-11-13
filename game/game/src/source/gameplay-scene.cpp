@@ -35,6 +35,7 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     Vector2 temp = *rabbitPosition;
     int radius = 92;
 
+
     // Navigate rabbit movement via Right key or D key
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) 
     {   
@@ -237,6 +238,71 @@ void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Text
     }
 }
 
+void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3) 
+{   
+    // Set X and Y coordinates
+    Vector2 temp = *rabbitPosition;
+
+
+    // Navigate rabbit boat movement via Right key or D key
+    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) 
+    {   
+        // Check if the rabbit is in screen bounds
+        if (temp.x < (GetScreenWidth() - 200)) 
+        {
+            temp.x += 2.0f; //Move quicker when going forward
+            *rabbitPosition = temp;
+        }
+    }
+
+    // Navigate rabbit movement via Left key or A key
+    else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) 
+    {
+        // Check if the rabbit is in screen bounds
+        if (!(temp.x < 0))
+        {
+            temp.x -= 1.0f;
+            *rabbitPosition = temp;
+        }
+    }   
+    
+    // Navigate rabbit movement via Up key or W key
+    else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) 
+    {  
+        // Check if the rabbit is in screen bounds
+        if(!(temp.y < 220))
+        {
+            temp.y -= 1.0f;
+            *rabbitPosition = temp;
+        }
+
+    }
+
+    // Navigate rabbit movement via Down key or S key
+    else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) 
+    {
+        // Check if the rabbit is in screen bounds
+        if (temp.y < (GetScreenHeight() - 85)) 
+        {
+            temp.y += 1.0f;
+            *rabbitPosition = temp;
+        }
+    }
+
+   if (frame == 1 || frame == 3)
+        {
+            DrawTextureV(*front, *rabbitPosition, WHITE);
+        }
+        else if (frame == 2) 
+        {
+            DrawTextureV(*front2, *rabbitPosition, WHITE);
+        }
+        else
+        {
+            DrawTextureV(*front3, *rabbitPosition, WHITE);
+        }
+}
+
 // Tutorial function
 void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal) 
 {
@@ -265,9 +331,26 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
 }
 
 // Italy function
-void renderItaly(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) 
+void renderItaly(GameScreen* state, Vector2* rabbitPosition, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3, Texture2D background1, Texture2D background2, Texture2D background3) 
 {
+    if (frame == 1) 
+    {
+        DrawTexture(background1, 0, 0, WHITE);
+    }
+    else if (frame == 2)
+    {
+        DrawTexture(background3, 0, 0, WHITE);
+    }
+    else if (frame == 3)
+    {
+        DrawTexture(background2, 0, 0, WHITE);
+    }
+    else
+    {
+        DrawTexture(background2, 0, 0, WHITE);
+    }
 
+    renderRabbitBoat(rabbitPosition, frame, front, front2, front3);
 }
 
 // Function used to reset colours and point counters of chosen answers in France quiz
