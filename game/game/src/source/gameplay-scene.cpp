@@ -710,35 +710,58 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     DrawTexture(*background, 0, 0, WHITE);
 
     renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
-    std::cout << rabbitPosition->x << " " << rabbitPosition->y << std::endl;
+    std::cout << rabbitPosition->x << " " << rabbitPosition->y << " ;; " << std::endl;
 
     // Initiliaze maze rectangles
-    Rectangle collision1 = {50, 335, 30, 105};
-    Rectangle collision2 = {5, 135, 90, 30};
-    Rectangle collision3 = {60, 40, 125, 30};
-    Rectangle collision4 = {155, 80, 30, 260};
-    Rectangle collision5 = {95, 235, 30, 15};
-    Rectangle collision6 = {200, 130, 80, 25};
-    Rectangle collision7 = {205, 330, 400, 15};
-    Rectangle collision8 = {265, 235, 25, 105};
-    Rectangle collision9 = {375, 235, 25, 105};
-    Rectangle collision10 = {375, 235, 120, 20};
-    Rectangle collision11 = {255, 0, 30, 40};
-    Rectangle collision12 = {365, 0, 30, 40};
+    // Rectangle collision1 = {50, 335, 30, 105};
+    // Rectangle collision2 = {5, 135, 90, 30};
+    // Rectangle collision3 = {60, 40, 125, 30};
+    // Rectangle collision4 = {155, 80, 30, 260};
+    // Rectangle collision5 = {95, 235, 30, 15};
+    // Rectangle collision6 = {200, 130, 80, 25};
+    // Rectangle collision7 = {205, 330, 400, 15};
+    // Rectangle collision8 = {265, 235, 25, 105};
+    // Rectangle collision9 = {375, 235, 25, 105};
+    // Rectangle collision10 = {375, 235, 120, 20};
+    // Rectangle collision11 = {255, 0, 30, 40};
+    // Rectangle collision12 = {365, 0, 30, 40};
+    // Rectangle collision13 = {490, 365, 30, 80};
+    // Rectangle collision14 = {560, 240, 50, 100};
+    // Rectangle collision15 = {355, 30, 125, 25};
+    // Rectangle collision16 = {465, 65, 30, 45};
+    // Rectangle collision17 = {585, 0, 30, 35};
+    // Rectangle collision18 = {680, 40, 30, 180};
+    // Rectangle collision19 = {680, 45, 110, 30};
+    // Rectangle collision20 = {680, 230, 130, 25};
+    // Rectangle collision21 = {780, 0, 30, 135};
+    Rectangle collision22 = {360, 140, 245, 25};
+    Rectangle collision23 = {680, 355, 55, 90};
+    Rectangle collision24 = {680, 330, 125, 15};
 
     // Check if the rabbit has touched the obstacles
-    collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision6, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision7, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision8, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision9, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision10, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision11, rabbitPosition, rabbitDirection, 20);
-    collisionCheck(collision12, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision6, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision7, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision8, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision9, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision10, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision11, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision12, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision13, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision14, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision15, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision16, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision17, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision18, rabbitPosition, rabbitDirection, 20);
+    //  collisionCheck(collision20, rabbitPosition, rabbitDirection, 20);
+    // collisionCheck(collision21, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision22, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision23, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision24, rabbitPosition, rabbitDirection, 20);
 }
 
 // Collision check function
