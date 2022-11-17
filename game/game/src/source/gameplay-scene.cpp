@@ -243,11 +243,17 @@ void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Text
     // Set X and Y coordinates
     Vector2 temp = *rabbitPosition;
 
+    if(temp.x >= (GetScreenWidth() - 200))
+    {
+        ClearBackground(DARKGRAY);
+        DrawText("THAT'S IT!", GetScreenWidth() / 4, GetScreenHeight() / 3, 70, GRAY);
+    }
+
     // Navigate rabbit boat movement via Right key or D key
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) 
     {   
         // Check if the rabbit is in screen bounds
-        if (temp.x < (GetScreenWidth() - 375)) 
+        if (temp.x < (GetScreenWidth() - 200)) 
         {
             //Move quicker when going forward
             temp.x += 2.0f; 
@@ -331,7 +337,7 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
 }
 
 // Italy function
-void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Position, Vector2* fish2Position, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3, Texture2D background1, Texture2D background2, Texture2D background3, Texture2D fish1, Texture2D fish2) 
+void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Position, Vector2* fish2Position, Vector2* fish3Position, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3, Texture2D background1, Texture2D background2, Texture2D background3, Texture2D fish1, Texture2D fish2, Texture2D fish3) 
 {
     if (frame == 1) 
     {
@@ -350,41 +356,52 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
         DrawTexture(background2, 0, 0, WHITE);
     }
 
+    // Add temporary vector to save fishes' location
     Vector2 rabbitTempPosition = *rabbitPosition;
 
     Vector2 fish1TempPosition = *fish1Position;
     Vector2 fish2TempPosition = *fish2Position;
+    Vector2 fish3TempPosition = *fish3Position;
 
-    if(rabbitTempPosition.x + 365 > fish1TempPosition.x)
+    // Check if there is a collision between the boat and the first fish
+    if(rabbitTempPosition.x + 365 < fish1TempPosition.x || rabbitTempPosition.y > fish1TempPosition.y)
     {
-        fish1TempPosition.x -= 0.0f;
-        rabbitTempPosition.x = 0.0f;
-
-        *fish1Position = fish1TempPosition;
-        *rabbitPosition = rabbitTempPosition;
-    }
-    else
-    {
-        fish1TempPosition.x -= 1.5f;
+        fish1TempPosition.x -= 1.8f;
         *fish1Position = fish1TempPosition;
     }
-
-    if(rabbitTempPosition.x + 365 > fish2TempPosition.x)
+    if(rabbitTempPosition.x - 365 > fish1TempPosition.x)
     {
-        fish2TempPosition.x -= 0.0f;
-        rabbitTempPosition.x = 0.0f;
-
+        fish1TempPosition.x -= 1.8f;
+        *fish1Position = fish1TempPosition;
+    }
+    
+    // Check if there is a collision between the boat and the second fish
+    if(rabbitTempPosition.x + 365 < fish2TempPosition.x || rabbitTempPosition.y < fish1TempPosition.y)
+    {
+        fish2TempPosition.x -= 1.8f;
         *fish2Position = fish2TempPosition;
-        *rabbitPosition = rabbitTempPosition;
     }
-    else
+    if(rabbitTempPosition.x - 365 > fish2TempPosition.x)
     {
-        fish2TempPosition.x -= 1.1f;
+        fish2TempPosition.x -= 1.8f;
         *fish2Position = fish2TempPosition;
     }
 
+    // Check if there is a collision between the boat and the third fish
+    if(rabbitTempPosition.x + 365 < fish3TempPosition.x || rabbitTempPosition.y > fish3TempPosition.y)
+    {
+        fish3TempPosition.x -= 1.8f;
+        *fish3Position = fish3TempPosition;
+    }
+    if(rabbitTempPosition.x - 365 > fish3TempPosition.x)
+    {
+        fish3TempPosition.x -= 1.8f;
+        *fish3Position = fish3TempPosition;
+    }
+     
     DrawTextureV(fish1, *fish1Position, WHITE);
     DrawTextureV(fish2, *fish2Position, WHITE);
+    DrawTextureV(fish3, *fish3Position, WHITE);
 
     renderRabbitBoat(rabbitPosition, frame, front, front2, front3);
 }

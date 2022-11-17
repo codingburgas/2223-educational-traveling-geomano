@@ -64,15 +64,17 @@ int main(void)
     Texture2D boatRabbit3 = LoadTexture("../src/assets/italy-rabbit-3.png");
 
     Texture2D fish1 = LoadTexture("../src/assets/green-fish-1.png");
-    Texture2D fish2 = LoadTexture("../src/assets/green-fish-2.png");
+    Texture2D fish2 = LoadTexture("../src/assets/orange-fish-2.png");
+    Texture2D fish3 = LoadTexture("../src/assets/purple-big-fish-1.png");
 
     // Initilize the necessary variables
     
     // X and Y position of the rabbit
     Vector2 rabbitPosition = { 440, 420 };
     Vector2 rabbitBoatPosition = { 0, 295 };
-    Vector2 fish1Position = { 900, 350 };
-    Vector2 fish2Position = { 900, 450 };
+    Vector2 fish1Position = { 700, 320 };
+    Vector2 fish2Position = { 1300, 420 };
+    Vector2 fish3Position = { 2100, 400 };
     
     Color firstColor = WHITE;
     Color secondColor = WHITE;
@@ -198,7 +200,7 @@ int main(void)
 
                 case 1:
                 completedTotal[1] = 1;
-                renderItaly(&currentScreen, &rabbitBoatPosition, &fish1Position, &fish2Position, frame, &boatRabbit1, &boatRabbit2, &boatRabbit3, italyBackground1, italyBackground2, italyBackground3, fish1, fish2);
+                renderItaly(&currentScreen, &rabbitBoatPosition, &fish1Position, &fish2Position, &fish3Position, frame, &boatRabbit1, &boatRabbit2, &boatRabbit3, italyBackground1, italyBackground2, italyBackground3, fish1, fish2, fish3);
                 break;
 
                 case 2:
