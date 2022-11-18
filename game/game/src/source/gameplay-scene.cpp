@@ -367,9 +367,6 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
     Rectangle fish2Collision = {fish2TempPosition.x, fish2TempPosition.y, 140, 60};
     Rectangle fish3Collision = {fish3TempPosition.x, fish3TempPosition.y, 140, 60};
     
-    cout << fish1TempPosition.x << " " << fish1TempPosition.y << " // ";
-    cout << rabbitTempPosition.x << " " << rabbitTempPosition.y << endl;
-
     // Check if there is a collision between the boat and the first fish
      if (CheckCollisionRecs(rabbitCollision, fish1Collision)) 
     {
@@ -797,9 +794,11 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
 }
 
 // Spain function
-void renderSpain(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* left, Texture2D* left2, Texture2D* right, Texture2D* right2, Texture2D* back) 
+void renderSpain(GameScreen* state, int* choice, Texture2D background, Texture2D rabbit, Texture2D outfit1, Texture2D outfit2, Texture2D outfit3, Texture2D outfit4, Texture2D outfit5, Texture2D outfit6, Texture2D outfit7)
 {
-
+    EnableCursor();
+    DrawTexture(background, 0, 0, WHITE);
+    DrawTexture(rabbit, 170, -70, WHITE);
 }
 
 // Bulgaria function
@@ -809,7 +808,6 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     DrawTexture(*background, 0, 0, WHITE);
 
     renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
-    std::cout << rabbitPosition->x << " " << rabbitPosition->y << " ;; " << std::endl;
 
     // Initiliaze maze rectangles
     Rectangle collision1 = {50, 335, 30, 105};

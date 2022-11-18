@@ -70,6 +70,16 @@ int main(void)
     Texture2D fish2ani = LoadTexture("../src/assets/orange-fish-2.png");
     Texture2D fish3ani = LoadTexture("../src/assets/purple-big-fish-2.png");
 
+    Texture2D spainBackground = LoadTexture("../src/assets/spain-bg.png");
+    Texture2D spainRabbit = LoadTexture("../src/assets/spain-rabbit.png");
+    Texture2D outfit1 = LoadTexture("../src/assets/shirt.png");
+    Texture2D outfit2 = LoadTexture("../src/assets/pink-bows.png");
+    Texture2D outfit3 = LoadTexture("../src/assets/sweater.png");
+    Texture2D outfit4 = LoadTexture("../src/assets/spain-shirt.png");
+    Texture2D outfit5 = LoadTexture("../src/assets/france-shirt.png");
+    Texture2D outfit6 = LoadTexture("../src/assets/hoodie.png");
+    Texture2D outfit7 = LoadTexture("../src/assets/bowtie.png");
+
     // Initilize the necessary variables
     
     // X and Y position of the rabbit
@@ -87,6 +97,7 @@ int main(void)
     int franceDialogue = 0;
     int rabbitDirection = 0;
     int countryChoice = 0;
+    int outfitChoice = 0;
     int franceDialogueCounter = 0;
     float timer = 0.0f;
     bool isFrench = 1;
@@ -122,8 +133,13 @@ int main(void)
 
         if (exitWindowRequested) //Check if player has pressed exit key
         {
+            DisableCursor();
             if (IsKeyPressed(KEY_Y)) exitWindow = true; //check for player confirmation
-            else if (IsKeyPressed(KEY_N)) exitWindowRequested = false;
+            else if (IsKeyPressed(KEY_N)) 
+            {
+                exitWindowRequested = false;
+                EnableCursor();
+            }
         }
 
         // Begin drawing
@@ -211,7 +227,7 @@ int main(void)
 
                 case 3:
                 completedTotal[3] = 1;
-                renderSpain(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &left, &left2, &right, &right2, &back);
+                renderSpain(&currentScreen, &outfitChoice, spainBackground, spainRabbit, outfit1, outfit2, outfit3, outfit4, outfit5, outfit6, outfit7);
                 break;
 
                 case 4:
