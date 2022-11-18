@@ -267,7 +267,7 @@ void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Text
         // Check if the rabbit is in screen bounds
         if (!(temp.x < 0))
         {
-            temp.x -= 1.0f;
+            temp.x -= 1.5f;
             *rabbitPosition = temp;
         }
     }   
@@ -278,7 +278,7 @@ void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Text
         // Check if the rabbit is in screen bounds
         if(!(temp.y < 220))
         {
-            temp.y -= 1.0f;
+            temp.y -= 1.5f;
             *rabbitPosition = temp;
         }
 
@@ -290,7 +290,7 @@ void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Text
         // Check if the rabbit is in screen bounds
         if (temp.y < (GetScreenHeight() - 125)) 
         {
-            temp.y += 1.0f;
+            temp.y += 1.5f;
             *rabbitPosition = temp;
         }
     }
@@ -337,7 +337,7 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
 }
 
 // Italy function
-void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Position, Vector2* fish2Position, Vector2* fish3Position, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3, Texture2D background1, Texture2D background2, Texture2D background3, Texture2D fish1, Texture2D fish2, Texture2D fish3) 
+void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Position, Vector2* fish2Position, Vector2* fish3Position, int frame, Texture2D* front, Texture2D* front2, Texture2D* front3, Texture2D background1, Texture2D background2, Texture2D background3, Texture2D fish1, Texture2D fish2, Texture2D fish3, Texture2D fish1ani, Texture2D fish2ani, Texture2D fish3ani, bool* isCompleted) 
 {
     if (frame == 1) 
     {
@@ -358,50 +358,96 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
 
     // Add temporary vector to save fishes' location
     Vector2 rabbitTempPosition = *rabbitPosition;
-
     Vector2 fish1TempPosition = *fish1Position;
     Vector2 fish2TempPosition = *fish2Position;
     Vector2 fish3TempPosition = *fish3Position;
 
-    // Check if there is a collision between the boat and the first fish
-    if(rabbitTempPosition.x + 365 < fish1TempPosition.x || rabbitTempPosition.y > fish1TempPosition.y)
-    {
-        fish1TempPosition.x -= 1.8f;
-        *fish1Position = fish1TempPosition;
-    }
-    if(rabbitTempPosition.x - 365 > fish1TempPosition.x)
-    {
-        fish1TempPosition.x -= 1.8f;
-        *fish1Position = fish1TempPosition;
-    }
+    Rectangle rabbitCollision = {rabbitTempPosition.x, rabbitTempPosition.y, 380, 60};
+    Rectangle fish1Collision = {fish1TempPosition.x, fish1TempPosition.y, 140, 60};
+    Rectangle fish2Collision = {fish2TempPosition.x, fish2TempPosition.y, 140, 60};
+    Rectangle fish3Collision = {fish3TempPosition.x, fish3TempPosition.y, 140, 60};
     
-    // Check if there is a collision between the boat and the second fish
-    if(rabbitTempPosition.x + 365 < fish2TempPosition.x || rabbitTempPosition.y < fish1TempPosition.y)
+    cout << fish1TempPosition.x << " " << fish1TempPosition.y << " // ";
+    cout << rabbitTempPosition.x << " " << rabbitTempPosition.y << endl;
+
+    // Check if there is a collision between the boat and the first fish
+     if (CheckCollisionRecs(rabbitCollision, fish1Collision)) 
     {
-        fish2TempPosition.x -= 1.8f;
-        *fish2Position = fish2TempPosition;
+       //return everything to default position
+       rabbitTempPosition = { 0, 295 }; 
+       fish1TempPosition = { 700, 320 };
+       fish2TempPosition = { 1400, 420 };
+       fish3TempPosition = { 2100, 400 };
+       *rabbitPosition = rabbitTempPosition;
+       *fish1Position = fish1TempPosition;
+       *fish2Position = fish1TempPosition;
+       *fish3Position = fish1TempPosition;
+
+       //go back to level selection
+       *state = LEVELSELECT; 
     }
-    if(rabbitTempPosition.x - 365 > fish2TempPosition.x)
+    else //else make fish 1 move
+    {
+        fish1TempPosition.x -= 1.8f;
+        *fish1Position = fish1TempPosition;
+    }
+
+    // Check if there is a collision between the boat and the second fish
+    if (CheckCollisionRecs(rabbitCollision, fish2Collision)) 
+    {
+       //return everything to default position
+       rabbitTempPosition = { 0, 295 }; 
+       fish1TempPosition = { 700, 320 };
+       fish2TempPosition = { 1400, 420 };
+       fish3TempPosition = { 2100, 400 };
+       *rabbitPosition = rabbitTempPosition;
+       *fish1Position = fish1TempPosition;
+       *fish2Position = fish1TempPosition;
+       *fish3Position = fish1TempPosition;
+
+       //go back to level selection
+       *state = LEVELSELECT; 
+    }
+    else //else make fish 2 move
     {
         fish2TempPosition.x -= 1.8f;
         *fish2Position = fish2TempPosition;
     }
 
     // Check if there is a collision between the boat and the third fish
-    if(rabbitTempPosition.x + 365 < fish3TempPosition.x || rabbitTempPosition.y > fish3TempPosition.y)
+    if (CheckCollisionRecs(rabbitCollision, fish3Collision)) 
     {
-        fish3TempPosition.x -= 1.8f;
-        *fish3Position = fish3TempPosition;
+       //return everything to default position
+       rabbitTempPosition = { 0, 295 }; 
+       fish1TempPosition = { 700, 320 };
+       fish2TempPosition = { 1400, 420 };
+       fish3TempPosition = { 2100, 400 };
+       *rabbitPosition = rabbitTempPosition;
+       *fish1Position = fish1TempPosition;
+       *fish2Position = fish1TempPosition;
+       *fish3Position = fish1TempPosition;
+
+       //go back to level selection
+       *state = LEVELSELECT; 
     }
-    if(rabbitTempPosition.x - 365 > fish3TempPosition.x)
+    else //else make fish 3 move
     {
         fish3TempPosition.x -= 1.8f;
         *fish3Position = fish3TempPosition;
     }
      
-    DrawTextureV(fish1, *fish1Position, WHITE);
-    DrawTextureV(fish2, *fish2Position, WHITE);
-    DrawTextureV(fish3, *fish3Position, WHITE);
+    if (frame == 1 || frame == 3) 
+    {
+        DrawTextureV(fish1, *fish1Position, WHITE);
+        DrawTextureV(fish2, *fish2Position, WHITE);
+        DrawTextureV(fish3, *fish3Position, WHITE);
+    }
+    else
+    {
+        DrawTextureV(fish1ani, *fish1Position, WHITE);
+        DrawTextureV(fish2ani, *fish2Position, WHITE);
+        DrawTextureV(fish3ani, *fish3Position, WHITE);
+    }
 
     renderRabbitBoat(rabbitPosition, frame, front, front2, front3);
 }
@@ -766,52 +812,53 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     std::cout << rabbitPosition->x << " " << rabbitPosition->y << " ;; " << std::endl;
 
     // Initiliaze maze rectangles
-    // Rectangle collision1 = {50, 335, 30, 105};
-    // Rectangle collision2 = {5, 135, 90, 30};
-    // Rectangle collision3 = {60, 40, 125, 30};
-    // Rectangle collision4 = {155, 80, 30, 260};
-    // Rectangle collision5 = {95, 235, 30, 15};
-    // Rectangle collision6 = {200, 130, 80, 25};
-    // Rectangle collision7 = {205, 330, 400, 15};
-    // Rectangle collision8 = {265, 235, 25, 105};
-    // Rectangle collision9 = {375, 235, 25, 105};
-    // Rectangle collision10 = {375, 235, 120, 20};
-    // Rectangle collision11 = {255, 0, 30, 40};
-    // Rectangle collision12 = {365, 0, 30, 40};
-    // Rectangle collision13 = {490, 365, 30, 80};
-    // Rectangle collision14 = {560, 240, 50, 100};
-    // Rectangle collision15 = {355, 30, 125, 25};
-    // Rectangle collision16 = {465, 65, 30, 45};
-    // Rectangle collision17 = {585, 0, 30, 35};
-    // Rectangle collision18 = {680, 40, 30, 180};
-    // Rectangle collision19 = {680, 45, 110, 30};
-    // Rectangle collision20 = {680, 230, 130, 25};
-    // Rectangle collision21 = {780, 0, 30, 135};
+    Rectangle collision1 = {50, 335, 30, 105};
+    Rectangle collision2 = {5, 135, 90, 30};
+    Rectangle collision3 = {60, 40, 125, 30};
+    Rectangle collision4 = {155, 80, 30, 260};
+    Rectangle collision5 = {95, 235, 30, 15};
+    Rectangle collision6 = {200, 130, 80, 25};
+    Rectangle collision7 = {205, 330, 400, 15};
+    Rectangle collision8 = {265, 235, 25, 105};
+    Rectangle collision9 = {375, 235, 25, 105};
+    Rectangle collision10 = {375, 235, 120, 20};
+    Rectangle collision11 = {255, 0, 30, 40};
+    Rectangle collision12 = {365, 0, 30, 40};
+    Rectangle collision13 = {490, 365, 30, 80};
+    Rectangle collision14 = {560, 240, 50, 100};
+    Rectangle collision15 = {355, 30, 125, 25};
+    Rectangle collision16 = {465, 65, 30, 45};
+    Rectangle collision17 = {585, 0, 30, 35};
+    Rectangle collision18 = {680, 40, 30, 180};
+    Rectangle collision19 = {680, 45, 110, 30};
+    Rectangle collision20 = {680, 230, 130, 25};
+    Rectangle collision21 = {780, 0, 30, 135};
     Rectangle collision22 = {360, 140, 245, 25};
     Rectangle collision23 = {680, 355, 55, 90};
     Rectangle collision24 = {680, 330, 125, 15};
 
     // Check if the rabbit has touched the obstacles
-    // collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision6, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision7, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision8, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision9, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision10, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision11, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision12, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision13, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision14, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision15, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision16, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision17, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision18, rabbitPosition, rabbitDirection, 20);
-    //  collisionCheck(collision20, rabbitPosition, rabbitDirection, 20);
-    // collisionCheck(collision21, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision1, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision2, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision3, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision4, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision5, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision6, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision7, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision8, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision9, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision10, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision11, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision12, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision13, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision14, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision15, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision16, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision17, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision18, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision19, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision20, rabbitPosition, rabbitDirection, 20);
+    collisionCheck(collision21, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision22, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision23, rabbitPosition, rabbitDirection, 20);
     collisionCheck(collision24, rabbitPosition, rabbitDirection, 20);

@@ -64,8 +64,11 @@ int main(void)
     Texture2D boatRabbit3 = LoadTexture("../src/assets/italy-rabbit-3.png");
 
     Texture2D fish1 = LoadTexture("../src/assets/green-fish-1.png");
-    Texture2D fish2 = LoadTexture("../src/assets/orange-fish-2.png");
+    Texture2D fish2 = LoadTexture("../src/assets/orange-fish-1.png");
     Texture2D fish3 = LoadTexture("../src/assets/purple-big-fish-1.png");
+    Texture2D fish1ani = LoadTexture("../src/assets/green-fish-2.png");
+    Texture2D fish2ani = LoadTexture("../src/assets/orange-fish-2.png");
+    Texture2D fish3ani = LoadTexture("../src/assets/purple-big-fish-2.png");
 
     // Initilize the necessary variables
     
@@ -73,7 +76,7 @@ int main(void)
     Vector2 rabbitPosition = { 440, 420 };
     Vector2 rabbitBoatPosition = { 0, 295 };
     Vector2 fish1Position = { 700, 320 };
-    Vector2 fish2Position = { 1300, 420 };
+    Vector2 fish2Position = { 1400, 420 };
     Vector2 fish3Position = { 2100, 400 };
     
     Color firstColor = WHITE;
@@ -182,11 +185,11 @@ int main(void)
             renderLevelSelection(map, star, &countryChoice, &currentScreen);
 
             //Check if any country game is completed
-            (completedTotal[0]) ? DrawText("-Tutorial Completed", 30, 110, 20, GRAY) : DrawText("", 30, 110, 20, GRAY);
-            (completedTotal[1]) ? DrawText("-Italy Completed", 30, 110, 20, GRAY) : DrawText("", 30, 110, 20, GRAY);
-            (completedTotal[2]) ? DrawText("-France Completed", 30, 110, 20, GRAY) : DrawText("", 30, 110, 20, GRAY);
-            (completedTotal[3]) ? DrawText("-Spain Completed", 30, 110, 20, GRAY) : DrawText("", 30, 110, 20, GRAY);
-            (completedTotal[4]) ? DrawText("-Bulgaria Completed", 30, 110, 20, GRAY) : DrawText("", 30, 110, 20, GRAY);
+            (completedTotal[0]) ? DrawText("-Tutorial Completed", 30, 110, 20, ORANGE) : DrawText("", 30, 110, 20, GRAY);
+            (completedTotal[1]) ? DrawText("-Italy Completed", 30, 180, 20, ORANGE) : DrawText("", 30, 180, 20, GRAY);
+            (completedTotal[2]) ? DrawText("-France Completed", 30, 250, 20, ORANGE) : DrawText("", 30, 250, 20, GRAY);
+            (completedTotal[3]) ? DrawText("-Spain Completed", 30, 320, 20, ORANGE) : DrawText("", 30, 320, 20, GRAY);
+            (completedTotal[4]) ? DrawText("-Bulgaria Completed", 30, 390, 20, ORANGE) : DrawText("", 30, 390, 20, GRAY);
             break;
 
             //Check chosen country
@@ -199,8 +202,7 @@ int main(void)
                 break;
 
                 case 1:
-                completedTotal[1] = 1;
-                renderItaly(&currentScreen, &rabbitBoatPosition, &fish1Position, &fish2Position, &fish3Position, frame, &boatRabbit1, &boatRabbit2, &boatRabbit3, italyBackground1, italyBackground2, italyBackground3, fish1, fish2, fish3);
+                renderItaly(&currentScreen, &rabbitBoatPosition, &fish1Position, &fish2Position, &fish3Position, frame, &boatRabbit1, &boatRabbit2, &boatRabbit3, italyBackground1, italyBackground2, italyBackground3, fish1, fish2, fish3, fish1ani, fish2ani, fish3ani, &completedTotal[1]);
                 break;
 
                 case 2:
