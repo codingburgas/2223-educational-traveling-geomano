@@ -1,5 +1,7 @@
 <h1 align="center">Educational Traveling Project</h1>
-  
+
+## 📋 Description
+*This repository is about our 2223-educational-traveling school project. Our task was to create a game related to geography and travelling around the world using c++.*
 
 ## 🖥 Team Members
 * **Valeria Yaneva** - *Scrum trainer* 
