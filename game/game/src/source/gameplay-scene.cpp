@@ -20,7 +20,8 @@ struct franceTest
     }; 
 
     // Answers array
-    bool franceAnswers[20] = {true, true, false, true, false, false, true, false, false, false, false, false, false};
+    bool franceAnswers[20] = {true, true, false, true, false, false, true};
+    vector<bool> isCorrect = {0};
 }franceVar;
 
 // Initiliaze necessary variables
@@ -505,8 +506,12 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
 
                 // Check the correct answer of question 1
                 if (select == 1)
-                { 
+                {   
                     isCorrect->Q1 = 1;
+                }
+                else
+                {
+                    isCorrect->Q1 = 0;
                 }
                 break;
                 
@@ -516,6 +521,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 { 
                     isCorrect->Q2 = 1;
                 }
+                else
+                {
+                    isCorrect->Q2 = 0;
+                }
                 break;
                 
                 // Check the correct answer of question 3
@@ -523,6 +532,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 if (select == 2)
                 {
                     isCorrect->Q3 = 1;
+                }
+                else
+                {
+                    isCorrect->Q3 = 0;
                 }
                 break;
 
@@ -532,6 +545,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 {
                     isCorrect->Q4 = 1;
                 }
+                else
+                {
+                    isCorrect->Q4 = 0;
+                }
                 break;
 
                 // Check the correct answer of question 5
@@ -539,6 +556,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 if (select == 2)
                 {
                     isCorrect->Q5 = 1;
+                }
+                else
+                {
+                    isCorrect->Q5 = 0;
                 }
                 break;
 
@@ -548,6 +569,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 {
                     isCorrect->Q6 = 1;
                 }
+                else
+                {
+                    isCorrect->Q6 = 0;
+                }
                 break;
 
                 // Check the correct answer of question 7
@@ -555,6 +580,10 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
                 if (select == 1)
                 { 
                     isCorrect->Q7 = 1;
+                }
+                else
+                {
+                    isCorrect->Q7 = 0;
                 }
                 break;
 
@@ -663,125 +692,147 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
 
         case 10:
         DrawText("That's it!", 130, 440, 35, WHITE);
-        *tempCorrect = *isCorrect;
         break;
 
         case 11:
         *isFrenchTalking = 0;
         
         // Summarize and compare the given answers with the correct answers
-        DrawText("Correct:", 370, 420, 25, ORANGE);
-
-        if(isCorrect->Q1 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q2 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q3 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q4 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q5 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q6 == 1)
-        testScore += 1;
-
-        if(isCorrect->Q7 == 1)
-        testScore += 1;
-
-        // Convert int to character in order to be drawn
-        newStr = to_string(testScore);
-        temp = newStr.c_str();
-        DrawText(temp, 480, 420, 25, YELLOW);
-
-        // Check if the score is above 5
-        if(testScore > 5)
-        {
-            DrawText("You passed!", 520, 423, 20, GRAY);
-
-            isCorrect->Q1 = 0;
-            isCorrect->Q2 = 0;
-            isCorrect->Q3 = 0;
-            isCorrect->Q4 = 0;
-            isCorrect->Q5 = 0;
-            isCorrect->Q6 = 0;
-            isCorrect->Q7 = 0;
-        }
-
-        // Highlight correct answers
-        if(tempCorrect->Q1 == 1) 
+        DrawText("Correct:", 400, 420, 25, ORANGE);
+        
+            if(isCorrect->Q1) 
         {
             DrawText("Q1", 300, 460, 20, ORANGE);
+            franceVar.isCorrect[0] = 1;
         }
         else 
         {
             DrawText("Q1", 300, 460, 20, GRAY);
+            franceVar.isCorrect[0] = 0;
         }
 
-        if(tempCorrect->Q2 == 1) 
+        if(isCorrect->Q2) 
         {
             DrawText("Q2", 340, 460, 20, ORANGE);
+            franceVar.isCorrect[1] = 1;
         }
         else 
         {
             DrawText("Q2", 340, 460, 20, GRAY);
+            franceVar.isCorrect[1] = 0;
         }
 
-        if(tempCorrect->Q3 == 1) 
+        if(isCorrect->Q3) 
         {
             DrawText("Q3", 380, 460, 20, ORANGE);
+           franceVar.isCorrect[2] = 1;
         }
         else 
         {
             DrawText("Q3", 380, 460, 20, GRAY);
+            franceVar.isCorrect[2] = 0;
         }
 
-        if(tempCorrect->Q4 == 1) 
+        if(isCorrect->Q4) 
         {
             DrawText("Q4", 420, 460, 20, ORANGE);
+            franceVar.isCorrect[3] = 1;
         }
         else 
         {
             DrawText("Q4", 420, 460, 20, GRAY);
+            franceVar.isCorrect[3] = 1;
         }
 
-        if(tempCorrect->Q5 == 1) 
+        if(isCorrect->Q5) 
         {
             DrawText("Q5", 460, 460, 20, ORANGE);
+            franceVar.isCorrect[4] = 1;
         }
         else 
         {
             DrawText("Q5", 460, 460, 20, GRAY);
+            franceVar.isCorrect[4] = 0;
         }
 
-        if(tempCorrect->Q6 == 1) 
+        if(isCorrect->Q6) 
         {
             DrawText("Q6", 500, 460, 20, ORANGE);
+            franceVar.isCorrect[5] = 1;
         }
         else 
         {
             DrawText("Q6", 500, 460, 20, GRAY);
+            franceVar.isCorrect[5] = 0;
         }
 
-        if(tempCorrect->Q7 == 1) 
+        if(isCorrect->Q7)
         {
             DrawText("Q7", 540, 460, 20, ORANGE);
+            franceVar.isCorrect[6] = 1;
         }
         else 
         {
             DrawText("Q7", 540, 460, 20, GRAY);
+            franceVar.isCorrect[6] = 0;
         }
+
         break;
 
         case 12:
+        if(franceVar.isCorrect[0])
+        {
+            testScore += 1;
+            franceVar.isCorrect[0] = 0;
+        }
+        if(franceVar.isCorrect[1])
+        {
+            testScore += 1;
+            franceVar.isCorrect[1] = 0;
+        }
+        if(franceVar.isCorrect[2])
+        {
+            testScore += 1;
+            franceVar.isCorrect[2] = 0;
+        }
+        if(franceVar.isCorrect[3])
+        {
+            testScore += 1;
+            franceVar.isCorrect[3] = 0;
+        }
+        if(franceVar.isCorrect[4])
+        {
+            testScore += 1;
+            franceVar.isCorrect[4] = 0;
+        }
+        if(franceVar.isCorrect[5])
+        {
+            testScore += 1;
+            franceVar.isCorrect[5] = 0;
+        }
+        if(franceVar.isCorrect[6])
+        {
+            testScore += 1;
+            franceVar.isCorrect[6] = 0;
+        }
+        if(franceVar.isCorrect[7])
+        {
+            testScore += 1;
+            franceVar.isCorrect[7] = 0;
+        }
+
         if (testScore > 5) 
         {
             *isCompleted = true;
         }
+
+        isCorrect->Q1 = 0;
+        isCorrect->Q2 = 0;
+        isCorrect->Q3 = 0;
+        isCorrect->Q4 = 0;
+        isCorrect->Q5 = 0;
+        isCorrect->Q6 = 0;
+        isCorrect->Q7 = 0;
 
         *state = LEVELSELECT;
         testScore = 0;
@@ -794,11 +845,106 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
 }
 
 // Spain function
-void renderSpain(GameScreen* state, int* choice, Texture2D background, Texture2D rabbit, Texture2D outfit1, Texture2D outfit2, Texture2D outfit3, Texture2D outfit4, Texture2D outfit5, Texture2D outfit6, Texture2D outfit7)
+void renderSpain(GameScreen* state, int* choice, bool completedTotal[], Texture2D background, Texture2D rabbit, Texture2D outfit1, Texture2D outfit2, Texture2D outfit3, Texture2D outfit4, Texture2D outfit5, Texture2D outfit6, Texture2D outfit7)
 {
     EnableCursor();
     DrawTexture(background, 0, 0, WHITE);
     DrawTexture(rabbit, 170, -70, WHITE);
+
+     if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) 
+    {
+        *choice+=1;
+    }
+    else if(IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) 
+    {
+        *choice-=1;
+    }
+
+    switch(*choice) {
+        case -1:
+        *choice = 0;
+        break;
+
+        case 0:
+        break;
+
+        case 1:
+        DrawTexture(outfit1, 170, -70, WHITE);
+        break;
+
+        case 2:
+        DrawTexture(outfit2, 170, -70, WHITE);
+        break;
+
+        case 3:
+        if (completedTotal[0])
+        {
+            DrawTexture(outfit3, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 4;
+        }
+        break;
+
+        case 4:
+        if (completedTotal[3])
+        {
+            DrawTexture(outfit4, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 5;
+        }
+
+        case 5:
+        if (completedTotal[2])
+        {
+            DrawTexture(outfit5, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 6;
+        }
+        break;
+
+        case 6:
+        if (completedTotal[4])
+        {
+            DrawTexture(outfit6, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 7;
+        }
+        break;
+
+        case 7:
+        if (completedTotal[2])
+        {
+            DrawTexture(outfit5, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 8;
+        }
+        break;
+
+        case 8:
+        if (completedTotal[5])
+        {
+            DrawTexture(outfit5, 170, -70, WHITE);
+        }
+        else
+        {
+            *choice = 0;
+        }
+        break;
+
+        default:
+        break;
+        
+    }   
 }
 
 // Bulgaria function

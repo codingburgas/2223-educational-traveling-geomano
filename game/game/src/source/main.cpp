@@ -226,8 +226,11 @@ int main(void)
                 break;
 
                 case 3:
-                completedTotal[3] = 1;
-                renderSpain(&currentScreen, &outfitChoice, spainBackground, spainRabbit, outfit1, outfit2, outfit3, outfit4, outfit5, outfit6, outfit7);
+                if (completedTotal[0] && completedTotal[1] && completedTotal[2] && completedTotal[4])
+                {
+                    completedTotal[3] = 1;
+                }
+                renderSpain(&currentScreen, &outfitChoice, completedTotal, spainBackground, spainRabbit, outfit1, outfit2, outfit3, outfit4, outfit5, outfit6, outfit7);
                 break;
 
                 case 4:
