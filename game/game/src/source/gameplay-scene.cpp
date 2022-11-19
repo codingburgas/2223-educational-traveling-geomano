@@ -27,7 +27,8 @@ struct franceTest
 // Initiliaze necessary variables
 int testScore = 0;
 int select = 0;
-string newStr;
+bool isCollected[3] = {0};
+bool bulgariaWarned = 0;
 
 // Rabbit movement in tutorial
 void renderRabbit(Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2) 
@@ -339,8 +340,24 @@ void resetAllLevels(Vector2 *rabbitPosition, int* rabbitDirection, Vector2 *rabb
     isCorrect->Q6 = 0;
     isCorrect->Q7 = 0;
 
+    isCollected[0] = 0;
+    isCollected[1] = 0;
+    isCollected[2] = 0;
+
     testScore = 0;
     *dialogueProgress = 0;
+}
+
+void bulgariaPickupWarn(Texture2D textbox, Texture2D rabbit)
+{
+    DrawTexture(rabbit, 600, 70, WHITE);
+    DrawTexture(textbox, 0, 355, WHITE);
+    DrawText("I can't pick this up yet...", 130, 430, 32, GRAY);
+
+    if(IsKeyPressed(KEY_ENTER))
+    {
+        bulgariaWarned = false;
+    }
 }
 // Tutorial function
 void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal, bool* isCompleted) 
@@ -365,6 +382,7 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
         *state = LEVELSELECT;
         rabbitPosition ->x = 440; 
         rabbitPosition ->y = 420;
+        *isCompleted = 1;
         *rabbitDirection = 3;
     }
 }
@@ -980,12 +998,111 @@ void renderSpain(GameScreen* state, int* choice, bool completedTotal[], Texture2
 }
 
 // Bulgaria function
-void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal) 
-{
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D item1,Texture2D item2, Texture2D item3, Texture2D goal0, Texture2D goal1, Texture2D goal2, Texture2D goal3, Texture2D textbox, Texture2D largeRabbit)
+{   
     // Draw background texture
     DrawTexture(*background, 0, 0, WHITE);
-
     renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
+
+    Rectangle item1Pos = {560, 420, 50, 50};
+    Rectangle item2Pos = {135, 230, 50, 50};
+    Rectangle item3Pos = {795, 125, 50, 50};
+    Rectangle goalPos = {440, 5, 50, 50};
+    Vector2 rabbitTempPos = *rabbitPosition;
+
+    if (!isCollected[0])
+    {
+        DrawTexture(item1, 560, 420, WHITE);
+        DrawText("(Pick up in order, ENTER to pick up)",20, 510, 15, WHITE);
+        DrawText("-Rose petals",20, 365, 20, WHITE);
+    }
+
+    if (!isCollected[1])
+    {
+        DrawTexture(item2, 135, 230, WHITE);
+        DrawText("-Rose oil",20, 405, 20, WHITE);
+    }
+
+    if (!isCollected[2])
+    {
+        DrawTexture(item3, 795, 125, WHITE);
+        DrawText("-Water",20, 445, 20, WHITE);
+    }
+
+    if(isCollected[0])
+    {
+        DrawTexture(goal1, 440, 5, WHITE);
+    }
+    else if(isCollected[1])
+    {
+        DrawTexture(goal2, 440, 5, WHITE);
+    }
+    else if(isCollected[2])
+    {
+        DrawTexture(goal3, 440, 5, WHITE);
+    }
+    else
+    {
+        DrawTexture(goal0, 440, 5, WHITE);
+    }
+    
+    if (bulgariaWarned)
+    {
+        bulgariaPickupWarn(textbox, largeRabbit);
+    }
+
+    if (CheckCollisionCircleRec(rabbitTempPos, 40, item1Pos))
+    {
+        if(IsKeyPressed(KEY_ENTER))
+        {
+            isCollected[0] = 1;
+        }
+    }
+
+    if (CheckCollisionCircleRec(rabbitTempPos, 40, item2Pos))
+    {
+        if(IsKeyPressed(KEY_ENTER))
+        {
+            if (isCollected[0])
+            {
+                isCollected[1] = 1;
+            }
+            else
+            {
+                bulgariaWarned = 1;
+            }
+        }
+    }
+
+    if (CheckCollisionCircleRec(rabbitTempPos, 40, item3Pos))
+    {
+         if(IsKeyPressed(KEY_ENTER))
+        {
+            if (isCollected[1])
+            {
+                isCollected[2] = 1;
+            }
+            else
+            {
+                bulgariaWarned = 1;
+            }
+        }
+    }
+
+    if (CheckCollisionCircleRec(rabbitTempPos, 20, goalPos))
+    {
+        if(isCollected[2])
+        {
+            rabbitPosition->x = 440;
+            rabbitPosition->y = 420;
+            *rabbitDirection = 3;
+            isCollected[0] = 0;
+            isCollected[1] = 0;
+            isCollected[2] = 0;
+            
+            *state = LEVELSELECT;
+        }
+    }
 
     // Initiliaze maze rectangles
     Rectangle collision1 = {50, 335, 30, 105};

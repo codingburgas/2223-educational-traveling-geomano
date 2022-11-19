@@ -43,7 +43,6 @@ int main(void)
     Texture2D backBtn = LoadTexture("../src/assets/back-arrow.png");
     Texture2D backBtnHover = LoadTexture("../src/assets/back-arrow-h.png");
     Texture2D star = LoadTexture("../src/assets/star-select.png");
-    Texture2D rose = LoadTexture("../src/assets/rose.png");
 
     Texture2D front = LoadTexture("../src/assets/front.png");
     Texture2D frontIdle = LoadTexture("../src/assets/front-2.png");
@@ -83,6 +82,13 @@ int main(void)
     Texture2D outfit6 = LoadTexture("../src/assets/hoodie.png");
     Texture2D outfit7 = LoadTexture("../src/assets/bowtie.png");
 
+    Texture2D mazeItem1 = LoadTexture("../src/assets/ingredient-1.png");
+    Texture2D mazeItem2 = LoadTexture("../src/assets/ingredient-2.png");
+    Texture2D mazeItem3 = LoadTexture("../src/assets/ingredient-3.png");
+    Texture2D mazeGoal0 = LoadTexture("../src/assets/maze-phase-0.png");
+    Texture2D mazeGoal1 = LoadTexture("../src/assets/maze-phase-1.png");
+    Texture2D mazeGoal2 = LoadTexture("../src/assets/maze-phase-2.png");
+    Texture2D mazeGoal3 = LoadTexture("../src/assets/maze-phase-final.png");
     // Initilize the necessary variables
     Rectangle backBtnCollide = {5, 460, 160, 55};
     
@@ -106,7 +112,7 @@ int main(void)
     float timer = 0.0f;
     bool isFrench = 1;
     bool isFrenchTalking = 0;
-    bool completedTotal[5] = {0, 0, 0, 0, 0};
+    bool completedTotal[5] = {0};
 
     questionPts franceQuestions;
     questionPts tempCorrect;
@@ -258,7 +264,7 @@ int main(void)
 
                 case 4:
                 completedTotal[4] = 1;
-                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, &rose);
+                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, mazeItem1, mazeItem2, mazeItem3, mazeGoal0, mazeGoal1, mazeGoal2, mazeGoal3, textbox, rabbitDetailed);
                 break;
 
                 default:
