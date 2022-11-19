@@ -23,6 +23,7 @@ int main(void)
 
     Texture2D mainBackground = LoadTexture("../src/assets/main-menu-bg.png");   
     Texture2D exitBackground = LoadTexture("../src/assets/exit-request-bg.png");
+    Texture2D backRequest = LoadTexture("../src/assets/go-back-screen.png");
     Texture2D map = LoadTexture("../src/assets/level-select-map.png");
     Texture2D tutorialBackground = LoadTexture("../src/assets/tutorial-bg.png");
     Texture2D franceBackground = LoadTexture("../src/assets/france-bg.png");
@@ -39,6 +40,8 @@ int main(void)
 
     Texture2D startBtn = LoadTexture("../src/assets/main-menu-button.png");
     Texture2D startBtnHover = LoadTexture("../src/assets/main-menu-button.png");
+    Texture2D backBtn = LoadTexture("../src/assets/back-arrow.png");
+    Texture2D backBtnHover = LoadTexture("../src/assets/back-arrow-h.png");
     Texture2D star = LoadTexture("../src/assets/star-select.png");
     Texture2D rose = LoadTexture("../src/assets/rose.png");
 
@@ -81,6 +84,7 @@ int main(void)
     Texture2D outfit7 = LoadTexture("../src/assets/bowtie.png");
 
     // Initilize the necessary variables
+    Rectangle backBtnCollide = {5, 460, 160, 55};
     
     // X and Y position of the rabbit
     Vector2 rabbitPosition = { 440, 420 };
@@ -88,14 +92,14 @@ int main(void)
     Vector2 fish1Position = { 700, 320 };
     Vector2 fish2Position = { 1400, 420 };
     Vector2 fish3Position = { 2100, 400 };
-    
+
     Color firstColor = WHITE;
     Color secondColor = WHITE;
 
     int frame = 0;
     int frameIntroCount = 0;
     int franceDialogue = 0;
-    int rabbitDirection = 0;
+    int rabbitDirection = 3;
     int countryChoice = 0;
     int outfitChoice = 0;
     int franceDialogueCounter = 0;
@@ -109,6 +113,7 @@ int main(void)
     
     SetExitKey(KEY_NULL); //set exit key to make custom exit request
     bool exitWindowRequested = false;   // Flag to request window to exit
+    bool goBackRequested = false;
     bool exitWindow = false;
 
     // Set game FPS
@@ -128,6 +133,8 @@ int main(void)
 
         frame = frame % 3;
         frameIntroCount = frameIntroCount + 1;
+        
+        if (CheckCollisionPointRec(mousePos, backBtnCollide) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))) goBackRequested = true;
 
         if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequested = true;
 
@@ -142,20 +149,38 @@ int main(void)
             }
         }
 
+        if (goBackRequested) //Check if player has pressed exit key
+        {
+            DisableCursor();
+            if (IsKeyPressed(KEY_Y)) {
+                resetAllLevels(&rabbitPosition, &rabbitDirection, &rabbitBoatPosition, &fish1Position, &fish2Position, &fish3Position, &franceQuestions, &franceDialogue);
+                currentScreen = LEVELSELECT; //check for player confirmation
+                goBackRequested = false;
+                EnableCursor();
+            }
+            else if (IsKeyPressed(KEY_N)) 
+            {
+                goBackRequested = false;
+                EnableCursor();
+            }
+        }
+
         // Begin drawing
         BeginDrawing();
 
         //Clear the colour of the background
         ClearBackground(RAYWHITE);
-
         //Check current screen state
-
-         if (exitWindowRequested)
-            {
-                DrawTexture(exitBackground, 0, 0, WHITE);
-                DrawText("Would you like to exit?", 280, 230, 30, WHITE);
-                DrawText("[Y/N]", 430, 280, 40, ORANGE);
-            }
+        if (exitWindowRequested)
+        {
+            DrawTexture(exitBackground, 0, 0, WHITE);
+            DrawText("Would you like to exit?", 280, 230, 30, WHITE);
+            DrawText("[Y/N]", 430, 280, 40, ORANGE);
+        }
+        else if (goBackRequested)
+        {
+            DrawTexture(backRequest, 0, 0, WHITE);
+        }
         else 
         {
         switch(currentScreen)
@@ -197,7 +222,6 @@ int main(void)
             break;
 
             case LEVELSELECT:
-            DisableCursor();
             renderLevelSelection(map, star, &countryChoice, &currentScreen);
 
             //Check if any country game is completed
@@ -213,8 +237,7 @@ int main(void)
             switch (countryChoice) 
             {
                 case 0:
-                completedTotal[0] = 1;
-                renderTutorial(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &tutorialBackground, &goal);
+                renderTutorial(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &tutorialBackground, &goal,  &completedTotal[0]);
                 break;
 
                 case 1:
@@ -243,6 +266,17 @@ int main(void)
                 break;
             }
             break;
+        }
+        if (currentScreen == GAMEPLAY)
+        {
+            if (CheckCollisionPointRec(mousePos, backBtnCollide))
+            {
+                DrawTexture(backBtnHover, 5, 460, WHITE);
+            }
+            else
+            {
+                DrawTexture(backBtn, 5, 460, WHITE);
+            }
         }
         }
         // End drawing

@@ -310,8 +310,40 @@ void renderRabbitBoat(Vector2* rabbitPosition, int frame, Texture2D* front, Text
         }
 }
 
+void resetAllLevels(Vector2 *rabbitPosition, int* rabbitDirection, Vector2 *rabbitBoatPosition,  Vector2 *fish1Position, Vector2 *fish2Position, Vector2 *fish3Position, questionPts *isCorrect, int* dialogueProgress)
+{
+    Vector2 rabbitTempPosition;
+    Vector2 rabbitBoatTempPosition;
+    Vector2 fish1TempPosition;
+    Vector2 fish2TempPosition;
+    Vector2 fish3TempPosition;
+
+    rabbitTempPosition = { 440, 420 }; 
+    *rabbitPosition = rabbitTempPosition;
+    *rabbitDirection = 3;
+
+    rabbitBoatTempPosition = { 0, 295 }; 
+    fish1TempPosition = { 700, 320 };
+    fish2TempPosition = { 1400, 420 };
+    fish3TempPosition = { 2100, 400 };
+    *rabbitBoatPosition = rabbitBoatTempPosition;
+    *fish1Position = fish1TempPosition;
+    *fish2Position = fish2TempPosition;
+    *fish3Position = fish3TempPosition;
+
+    isCorrect->Q1 = 0;
+    isCorrect->Q2 = 0;
+    isCorrect->Q3 = 0;
+    isCorrect->Q4 = 0;
+    isCorrect->Q5 = 0;
+    isCorrect->Q6 = 0;
+    isCorrect->Q7 = 0;
+
+    testScore = 0;
+    *dialogueProgress = 0;
+}
 // Tutorial function
-void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal) 
+void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* goal, bool* isCompleted) 
 {
     // Set X and Y coordinates
     Vector2 temp = *rabbitPosition;
