@@ -31,7 +31,7 @@
  ## 🌍 Demo of the project
 
 <p align="center">
-<img src="https://cdn.discordapp.com/attachments/1031622618983440487/1043867949884264490/image.png" width = "1400px" >
+<img src="https://cdn.discordapp.com/attachments/1031622618983440487/1043882455419068467/demo-banner.png" width = "1400px" >
 </p>
 
 
