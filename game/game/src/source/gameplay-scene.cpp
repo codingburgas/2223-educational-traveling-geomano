@@ -326,7 +326,7 @@ void resetAllLevels(Vector2 *rabbitPosition, int* rabbitDirection, Vector2 *rabb
     rabbitBoatTempPosition = { 0, 295 }; 
     fish1TempPosition = { 700, 320 };
     fish2TempPosition = { 1400, 420 };
-    fish3TempPosition = { 2100, 400 };
+    fish3TempPosition = { 1950, 345 };
     *rabbitBoatPosition = rabbitBoatTempPosition;
     *fish1Position = fish1TempPosition;
     *fish2Position = fish2TempPosition;
@@ -379,11 +379,11 @@ void renderTutorial(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     // Check if the star has been reached
     if (CheckCollisionCircleRec(temp, 85 , goalLocation))
     {
-        *state = LEVELSELECT;
+        *isCompleted = 1;
         rabbitPosition ->x = 440; 
         rabbitPosition ->y = 420;
-        *isCompleted = 1;
         *rabbitDirection = 3;
+        *state = LEVELSELECT;
     }
 }
 
@@ -413,7 +413,7 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
     Vector2 fish2TempPosition = *fish2Position;
     Vector2 fish3TempPosition = *fish3Position;
 
-    Rectangle rabbitCollision = {rabbitTempPosition.x, rabbitTempPosition.y, 380, 60};
+    Rectangle rabbitCollision = {rabbitTempPosition.x, rabbitTempPosition.y, 360, 50};
     Rectangle fish1Collision = {fish1TempPosition.x, fish1TempPosition.y, 140, 60};
     Rectangle fish2Collision = {fish2TempPosition.x, fish2TempPosition.y, 140, 60};
     Rectangle fish3Collision = {fish3TempPosition.x, fish3TempPosition.y, 140, 60};
@@ -425,7 +425,7 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
        rabbitTempPosition = { 0, 295 }; 
        fish1TempPosition = { 700, 320 };
        fish2TempPosition = { 1400, 420 };
-       fish3TempPosition = { 2100, 400 };
+       fish3TempPosition = { 1950, 345 };
        *rabbitPosition = rabbitTempPosition;
        *fish1Position = fish1TempPosition;
        *fish2Position = fish1TempPosition;
@@ -436,7 +436,7 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
     }
     else //else make fish 1 move
     {
-        fish1TempPosition.x -= 1.8f;
+        fish1TempPosition.x -= 2.0f;
         *fish1Position = fish1TempPosition;
     }
 
@@ -447,18 +447,18 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
        rabbitTempPosition = { 0, 295 }; 
        fish1TempPosition = { 700, 320 };
        fish2TempPosition = { 1400, 420 };
-       fish3TempPosition = { 2100, 400 };
+       fish3TempPosition = { 1950, 345 };
        *rabbitPosition = rabbitTempPosition;
        *fish1Position = fish1TempPosition;
-       *fish2Position = fish1TempPosition;
-       *fish3Position = fish1TempPosition;
+       *fish2Position = fish2TempPosition;
+       *fish3Position = fish3TempPosition;
 
        //go back to level selection
        *state = LEVELSELECT; 
     }
     else //else make fish 2 move
     {
-        fish2TempPosition.x -= 1.8f;
+        fish2TempPosition.x -= 2.5f;
         *fish2Position = fish2TempPosition;
     }
 
@@ -469,19 +469,35 @@ void renderItaly(GameScreen* state, Vector2* rabbitPosition, Vector2* fish1Posit
        rabbitTempPosition = { 0, 295 }; 
        fish1TempPosition = { 700, 320 };
        fish2TempPosition = { 1400, 420 };
-       fish3TempPosition = { 2100, 400 };
+       fish3TempPosition = { 1950, 345 };
        *rabbitPosition = rabbitTempPosition;
        *fish1Position = fish1TempPosition;
-       *fish2Position = fish1TempPosition;
-       *fish3Position = fish1TempPosition;
+       *fish2Position = fish2TempPosition;
+       *fish3Position = fish3TempPosition;
 
        //go back to level selection
        *state = LEVELSELECT; 
     }
     else //else make fish 3 move
     {
-        fish3TempPosition.x -= 1.8f;
+        fish3TempPosition.x -= 3.5f;
         *fish3Position = fish3TempPosition;
+    }
+
+    if (fish3Position->x <= -10)
+    {
+        *isCompleted = 1;
+        rabbitTempPosition = { 0, 295 }; 
+       fish1TempPosition = { 700, 320 };
+       fish2TempPosition = { 1400, 420 };
+       fish3TempPosition = { 1950, 345 };
+       *rabbitPosition = rabbitTempPosition;
+       *fish1Position = fish1TempPosition;
+       *fish2Position = fish2TempPosition;
+       *fish3Position = fish3TempPosition;
+
+        //go back to level selection
+       *state = LEVELSELECT; 
     }
      
     if (frame == 1 || frame == 3) 
@@ -998,12 +1014,11 @@ void renderSpain(GameScreen* state, int* choice, bool completedTotal[], Texture2
 }
 
 // Bulgaria function
-void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D item1,Texture2D item2, Texture2D item3, Texture2D goal0, Texture2D goal1, Texture2D goal2, Texture2D goal3, Texture2D textbox, Texture2D largeRabbit)
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, bool* isCompleted, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D item1,Texture2D item2, Texture2D item3, Texture2D goal0, Texture2D goal1, Texture2D goal2, Texture2D goal3, Texture2D textbox, Texture2D largeRabbit)
 {   
     // Draw background texture
     DrawTexture(*background, 0, 0, WHITE);
-    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
-
+    
     Rectangle item1Pos = {560, 420, 50, 50};
     Rectangle item2Pos = {135, 230, 50, 50};
     Rectangle item3Pos = {795, 125, 50, 50};
@@ -1013,39 +1028,55 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     if (!isCollected[0])
     {
         DrawTexture(item1, 560, 420, WHITE);
-        DrawText("(Pick up in order, ENTER to pick up)",20, 510, 15, WHITE);
-        DrawText("-Rose petals",20, 365, 20, WHITE);
     }
 
     if (!isCollected[1])
     {
         DrawTexture(item2, 135, 230, WHITE);
-        DrawText("-Rose oil",20, 405, 20, WHITE);
     }
 
     if (!isCollected[2])
     {
         DrawTexture(item3, 795, 125, WHITE);
+    }
+
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
+
+    if (!isCollected[0])
+    {
+        DrawText("(Pick up in order, ENTER to pick up)",20, 510, 15, WHITE); 
+        DrawText("-Rose petals",20, 365, 20, WHITE);
+    }
+
+    if (!isCollected[1])
+    {
+        DrawText("-Rose oil",20, 405, 20, WHITE);
+    }
+
+    if (!isCollected[2])
+    {
         DrawText("-Water",20, 445, 20, WHITE);
     }
 
-    if(isCollected[0])
+
+    if(isCollected[0] && !isCollected[1])
     {
         DrawTexture(goal1, 440, 5, WHITE);
     }
-    else if(isCollected[1])
+    else if(isCollected[0] && isCollected[1] && !isCollected[2])
     {
         DrawTexture(goal2, 440, 5, WHITE);
     }
-    else if(isCollected[2])
+    else if(isCollected[0] && isCollected[1] && isCollected[2])
     {
         DrawTexture(goal3, 440, 5, WHITE);
+        DrawText("All items collected! Reach the goal.",20, 510, 15, ORANGE);
     }
     else
     {
         DrawTexture(goal0, 440, 5, WHITE);
     }
-    
+
     if (bulgariaWarned)
     {
         bulgariaPickupWarn(textbox, largeRabbit);
@@ -1099,6 +1130,7 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
             isCollected[0] = 0;
             isCollected[1] = 0;
             isCollected[2] = 0;
+            
             
             *state = LEVELSELECT;
         }

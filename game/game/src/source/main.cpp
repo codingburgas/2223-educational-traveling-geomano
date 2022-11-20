@@ -97,7 +97,7 @@ int main(void)
     Vector2 rabbitBoatPosition = { 0, 295 };
     Vector2 fish1Position = { 700, 320 };
     Vector2 fish2Position = { 1400, 420 };
-    Vector2 fish3Position = { 2100, 400 };
+    Vector2 fish3Position = { 1950, 345 };
 
     Color firstColor = WHITE;
     Color secondColor = WHITE;
@@ -263,8 +263,7 @@ int main(void)
                 break;
 
                 case 4:
-                completedTotal[4] = 1;
-                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, mazeItem1, mazeItem2, mazeItem3, mazeGoal0, mazeGoal1, mazeGoal2, mazeGoal3, textbox, rabbitDetailed);
+                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, &completedTotal[4], frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, mazeItem1, mazeItem2, mazeItem3, mazeGoal0, mazeGoal1, mazeGoal2, mazeGoal3, textbox, rabbitDetailed);
                 break;
 
                 default:
