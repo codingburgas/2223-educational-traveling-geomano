@@ -554,8 +554,6 @@ void renderFrance(GameScreen* state, bool* isFrench, bool* isFrenchTalking, Text
    }
 
    DrawTexture(*textbox, 0, 355, WHITE);
-    
-   std::cout << *dialogueProgress - 3 << " " << select << endl;
    
    // Check if the quiz has been started
    if(IsKeyPressed(KEY_ENTER)) 
@@ -1014,7 +1012,7 @@ void renderSpain(GameScreen* state, int* choice, bool completedTotal[], Texture2
 }
 
 // Bulgaria function
-void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, bool* isCompleted, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D item1,Texture2D item2, Texture2D item3, Texture2D goal0, Texture2D goal1, Texture2D goal2, Texture2D goal3, Texture2D textbox, Texture2D largeRabbit)
+void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirection, bool* isCompleted, int frame, Texture2D* front, Texture2D* frontIdle, Texture2D* frontWalk1, Texture2D* frontWalk2, Texture2D* left, Texture2D* left2, Texture2D* leftWalk2, Texture2D* right, Texture2D* right2, Texture2D* rightWalk2, Texture2D* back, Texture2D* backIdle, Texture2D* backWalk1, Texture2D* backWalk2, Texture2D* background, Texture2D* overlay, Texture2D item1,Texture2D item2, Texture2D item3, Texture2D goal0, Texture2D goal1, Texture2D goal2, Texture2D goal3, Texture2D textbox, Texture2D largeRabbit)
 {   
     // Draw background texture
     DrawTexture(*background, 0, 0, WHITE);
@@ -1040,25 +1038,6 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
         DrawTexture(item3, 795, 125, WHITE);
     }
 
-    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
-
-    if (!isCollected[0])
-    {
-        DrawText("(Pick up in order, ENTER to pick up)",20, 510, 15, WHITE); 
-        DrawText("-Rose petals",20, 365, 20, WHITE);
-    }
-
-    if (!isCollected[1])
-    {
-        DrawText("-Rose oil",20, 405, 20, WHITE);
-    }
-
-    if (!isCollected[2])
-    {
-        DrawText("-Water",20, 445, 20, WHITE);
-    }
-
-
     if(isCollected[0] && !isCollected[1])
     {
         DrawTexture(goal1, 440, 5, WHITE);
@@ -1070,11 +1049,36 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     else if(isCollected[0] && isCollected[1] && isCollected[2])
     {
         DrawTexture(goal3, 440, 5, WHITE);
-        DrawText("All items collected! Reach the goal.",20, 510, 15, ORANGE);
     }
     else
     {
         DrawTexture(goal0, 440, 5, WHITE);
+    }
+
+    renderRabbit(rabbitPosition, rabbitDirection, frame, front, frontIdle, frontWalk1, frontWalk2, left, left2, leftWalk2, right, right2, rightWalk2, back, backIdle, backWalk1, backWalk2);
+    DrawTexture(*overlay, 0, 0, WHITE);
+
+    if (!bulgariaWarned)
+    {
+        if (!isCollected[0])
+        {
+            DrawText("(Pick up in order, ENTER to pick up)",20, 500, 15, YELLOW); 
+            DrawText("-Rose petals",20, 365, 20, WHITE);
+        }
+
+        if (!isCollected[1])
+        {
+            DrawText("-Rose oil",20, 405, 20, WHITE);
+        }
+
+        if (!isCollected[2])
+        {
+            DrawText("-Water",20, 445, 20, WHITE);
+        }
+        else
+        {
+            DrawText("All items collected! Reach the goal.",20, 510, 15, YELLOW);
+        }
     }
 
     if (bulgariaWarned)
@@ -1124,6 +1128,7 @@ void renderBulgaria(GameScreen* state, Vector2* rabbitPosition, int* rabbitDirec
     {
         if(isCollected[2])
         {
+            *isCompleted = 1;
             rabbitPosition->x = 440;
             rabbitPosition->y = 420;
             *rabbitDirection = 3;

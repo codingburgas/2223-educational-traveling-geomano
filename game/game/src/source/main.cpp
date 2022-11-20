@@ -82,6 +82,7 @@ int main(void)
     Texture2D outfit6 = LoadTexture("../src/assets/hoodie.png");
     Texture2D outfit7 = LoadTexture("../src/assets/bowtie.png");
 
+    Texture2D mazeOverlay = LoadTexture("../src/assets/bulgaria-overlay.png");
     Texture2D mazeItem1 = LoadTexture("../src/assets/ingredient-1.png");
     Texture2D mazeItem2 = LoadTexture("../src/assets/ingredient-2.png");
     Texture2D mazeItem3 = LoadTexture("../src/assets/ingredient-3.png");
@@ -193,7 +194,6 @@ int main(void)
         {
             case INTRO:
             {
-                std::cout << " " << (frameIntroCount/30)  << " ";
                 DrawTexture(mainBackground, 0, 0, WHITE);
             
                 if (((frameIntroCount/10)) < 3)
@@ -263,7 +263,7 @@ int main(void)
                 break;
 
                 case 4:
-                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, &completedTotal[4], frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, mazeItem1, mazeItem2, mazeItem3, mazeGoal0, mazeGoal1, mazeGoal2, mazeGoal3, textbox, rabbitDetailed);
+                renderBulgaria(&currentScreen, &rabbitPosition, &rabbitDirection, &completedTotal[4], frame, &front, &frontIdle, &frontWalk1, &frontWalk2, &left, &left2, &leftWalk2, &right, &right2, &rightWalk2, &back, &backIdle, &backWalk1, &backWalk2, &bulgariaBackground, &mazeOverlay, mazeItem1, mazeItem2, mazeItem3, mazeGoal0, mazeGoal1, mazeGoal2, mazeGoal3, textbox, rabbitDetailed);
                 break;
 
                 default:
