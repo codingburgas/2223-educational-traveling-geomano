@@ -8,6 +8,10 @@
 ## 🎮 About the game
 *Eurobunnea is a unique game full of surprises which consists of a mix of genres. Enter the role of Star - a cute little bunny on a fun adventure around Europe. Get to face different challenges - from quizzes and mazes, to even fishes. Try on different outfits unlockable by beating levels, all while enjoying the beautiful unique style of Eurobunnea.*
 
+## 📺 Trailer
+
+*You can watch a trailer of our program <a href="https://codingburgas-my.sharepoint.com/:v:/g/personal/zypetkova20_codingburgas_bg/EbPK5mRTlO9IkJSES1Dws0cBNeDahj4Tgm5EQPNLkyVzQg?e=dLY7pi">here</a>.*
+
 
 ## 👩🏻‍💻 Team Members
 * **Valeria Yaneva** - *Scrum trainer* 
